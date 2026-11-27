@@ -12,12 +12,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,800..900&amp;family=Montserrat:wght@400;500;600;700;800;900&amp;display=swap">
-  <link rel="stylesheet" href="assets/css/tokens.css?v=mwyv1q1d">
-  <link rel="stylesheet" href="assets/css/styles.css?v=mwyv1q1d">
-  <link rel="stylesheet" href="assets/css/pages.css?v=mwyv1q1d">
+  <link rel="stylesheet" href="assets/css/tokens.css?v=mwyv7c3y">
+  <link rel="stylesheet" href="assets/css/styles.css?v=mwyv7c3y">
+  <link rel="stylesheet" href="assets/css/pages.css?v=mwyv7c3y">
   <script>try{var p=localStorage.getItem('opf-phase');if(p)document.documentElement.dataset.phase=p}catch(e){}</script>
-  <script src="assets/js/main.js?v=mwyv1q1d" defer></script>
-  <script src="assets/js/site.js?v=mwyv1q1d" defer></script>
+  <script src="assets/js/main.js?v=mwyv7c3y" defer></script>
+  <script src="assets/js/site.js?v=mwyv7c3y" defer></script>
 </head>
 <body>
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -421,6 +421,50 @@
           </div>
         </div>
       </details>
+    </section>
+
+    <section class="section" id="venue-3d" aria-labelledby="v3d-title">
+      <div class="sec-title">
+        <h2 class="sec-title__text display" id="v3d-title"><span class="sec-title__ghost" aria-hidden="true">Explore in 3D</span><span>Explore in 3D</span><span class="sec-title__ghost" aria-hidden="true">Explore in 3D</span></h2>
+      </div>
+      <div class="container">
+        <p class="lead">Walk the venue before you arrive. Drag to look around, scroll to zoom, and use the numbered views at the bottom.</p>
+        <div class="tabs" role="tablist" aria-label="3D venue scene">
+          <button type="button" role="tab" id="t-v-main" aria-controls="v-main" aria-selected="true">Main Stage</button>
+          <button type="button" role="tab" id="t-v-ballroom" aria-controls="v-ballroom" aria-selected="false" tabindex="-1">Grand Ballroom</button>
+          <button type="button" role="tab" id="t-v-booths" aria-controls="v-booths" aria-selected="false" tabindex="-1">IP Booth Zone</button>
+          <button type="button" role="tab" id="t-v-photo" aria-controls="v-photo" aria-selected="false" tabindex="-1">Photo spots</button>
+        </div>
+        <div id="v-main" role="tabpanel" aria-labelledby="t-v-main">
+          <div class="venue3d" data-src="https://otakupopfes.vercel.app/main" data-title="3D view of the Main Stage in the Crystal Pavilion">
+            <img src="assets/img/venue3d/main.jpg" alt="" loading="lazy" width="960" height="540">
+            <button type="button" class="btn btn--pink venue3d__play">▶ Explore the Main Stage in 3D</button>
+          </div>
+          <p class="venue3d__cap"><strong>Crystal Pavilion · Main Stage</strong> — Cosplay Cup, Ani-Karaoke and stage shows. <a href="https://otakupopfes.vercel.app/main" target="_blank" rel="noopener">Open full screen ↗</a></p>
+        </div>
+        <div id="v-ballroom" role="tabpanel" aria-labelledby="t-v-ballroom" hidden>
+          <div class="venue3d" data-src="https://otakupopfes.vercel.app/ballroom" data-title="3D overview of the Grand Ballroom">
+            <img src="assets/img/venue3d/ballroom.jpg" alt="" loading="lazy" width="960" height="540">
+            <button type="button" class="btn btn--pink venue3d__play">▶ Explore the Grand Ballroom in 3D</button>
+          </div>
+          <p class="venue3d__cap"><strong>Grand Ballroom</strong> — Panel Stage, Mini Stage, theatre seating and the foyer entrance arch. <a href="https://otakupopfes.vercel.app/ballroom" target="_blank" rel="noopener">Open full screen ↗</a></p>
+        </div>
+        <div id="v-booths" role="tabpanel" aria-labelledby="t-v-booths" hidden>
+          <div class="venue3d" data-src="https://otakupopfes.vercel.app/booths/zone" data-title="3D view of the IP Booth Zone">
+            <img src="assets/img/venue3d/booths.jpg" alt="" loading="lazy" width="960" height="540">
+            <button type="button" class="btn btn--pink venue3d__play">▶ Explore the IP Booth Zone in 3D</button>
+          </div>
+          <p class="venue3d__cap"><strong>Crystal Pavilion · IP Booth Zone</strong> — the curved booth arc from the entrance. <a href="https://otakupopfes.vercel.app/booths/zone" target="_blank" rel="noopener">Open full screen ↗</a></p>
+        </div>
+        <div id="v-photo" role="tabpanel" aria-labelledby="t-v-photo" hidden>
+          <div class="venue3d" data-src="https://otakupopfes.vercel.app/installations/cube-tower" data-title="3D view of the Cube Tower photo spot">
+            <img src="assets/img/venue3d/installations.jpg" alt="" loading="lazy" width="960" height="540">
+            <button type="button" class="btn btn--pink venue3d__play">▶ Explore the photo spots in 3D</button>
+          </div>
+          <p class="venue3d__cap"><strong>Photo spots</strong> — Cube Tower, Date Letters, Polaroid Frame and Gachapon. <a href="https://otakupopfes.vercel.app/installations/cube-tower" target="_blank" rel="noopener">Open full screen ↗</a></p>
+        </div>
+        <p class="ticket-note center">3D concept — artwork, sizes and layout are not final.</p>
+      </div>
     </section>
 
     <section class="section" id="downloads" aria-labelledby="dl-title">

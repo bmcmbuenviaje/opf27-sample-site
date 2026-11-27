@@ -224,3 +224,18 @@
     f.reset();
   }));
 })();
+
+/* 3D venue viewer: load the heavy WebGL scene only when asked */
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.venue3d__play');
+  if (!btn) return;
+  const box = btn.closest('.venue3d');
+  const f = document.createElement('iframe');
+  f.src = box.dataset.src;
+  f.title = box.dataset.title;
+  f.allow = 'fullscreen';
+  f.loading = 'eager';
+  box.replaceChildren(f);
+  box.classList.add('is-live');
+  f.focus();
+});

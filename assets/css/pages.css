@@ -359,3 +359,17 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 14px 28px color-mix(in
   .sample-panel__toggle span { display: none; }
   .footer-main .container { grid-template-columns: 1fr 1fr; padding-top: 40px; }
 }
+
+/* ---------- 3D venue viewer (otakupopfes.vercel.app), click to load ---------- */
+.venue3d { position: relative; aspect-ratio: 16 / 9; border-radius: var(--opf-radius-lg); overflow: hidden; background: var(--night); border: 3px solid var(--ink); }
+.venue3d img, .venue3d iframe { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border: 0; }
+.venue3d::after { content: ""; position: absolute; inset: 0; background: color-mix(in srgb, var(--night) 35%, transparent); pointer-events: none; }
+.venue3d.is-live::after { display: none; }
+.venue3d__play { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 1; box-shadow: 0 10px 30px rgba(0, 0, 0, .35); }
+.venue3d__play:hover { transform: translate(-50%, calc(-50% - 1px)); }
+.venue3d__cap { margin: 12px 0 0; font-size: 14px; }
+.venue3d__cap a { color: var(--blue); font-weight: 800; white-space: nowrap; }
+@media (max-width: 760px) {
+  .venue3d { aspect-ratio: 4 / 5; }
+  .venue3d__play { white-space: normal; width: max-content; max-width: 86%; text-align: center; }
+}
