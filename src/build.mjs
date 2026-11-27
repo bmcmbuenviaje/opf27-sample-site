@@ -239,11 +239,13 @@ function page(file, meta, body) {
   <link rel="stylesheet" href="assets/css/tokens.css?v=${V}">
   <link rel="stylesheet" href="assets/css/styles.css?v=${V}">
   <link rel="stylesheet" href="assets/css/pages.css?v=${V}">${css}
+  <link rel="stylesheet" href="assets/css/motion.css?v=${V}">
   <script>try{var p=localStorage.getItem('opf-phase');if(p)document.documentElement.dataset.phase=p}catch(e){}</script>
   <script src="assets/js/consent.js?v=${V}" defer></script>
   <script src="assets/js/main.js?v=${V}" defer></script>
   <script src="assets/js/site.js?v=${V}" defer></script>
   <script src="assets/js/map.js?v=${V}" defer></script>${js}
+  <script src="assets/js/motion.js?v=${V}" defer></script>
 </head>
 <body${meta.bodyClass ? ` class="${meta.bodyClass}"` : ''}>
   ${sprite}

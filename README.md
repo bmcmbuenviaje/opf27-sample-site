@@ -9,6 +9,7 @@ Content, prices and schedules are placeholders. All pages are `noindex`.
 - **Landing page samples:** `lp-ticket-drop.html` (A — dark, urgent, single action) and `lp-cosplay-cup.html` (B — light, editorial, long form). Minimal header, no main menu (`"layout": "landing"` in the page meta).
 - **Home pop-up:** shows once after the cookie choice — 7 s, half-page scroll or exit intent; capped to once per 3 days (`assets/js/popup.js`).
 - **Cookie consent + analytics:** Accept all / Accept necessary / Deny all, plus Cookie settings in every footer (`assets/js/consent.js`). Analytics (PostHog) loads only after consent — paste the project key at the top of `consent.js`. CTAs with `data-track="…"` send named events.
+- **Motion layer** (`assets/css/motion.css`, `assets/js/motion.js`): scroll reveals, drifting section titles, hero parallax, count-up stats, 3D tilt cards, sparkle bursts on main buttons, floating mascots, scroll progress bar, home marquee and smooth page transitions. All off for visitors with reduced-motion turned on.
 - Swapping in the approved KV: see [KV-SWAP.md](KV-SWAP.md).
 
 Build: `node src/build.mjs` (page fragments in `src/pages/`, shared header/footer in `src/build.mjs`).

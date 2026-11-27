@@ -1,0 +1,111 @@
+/* ==========================================================================
+   OPF 2027 — motion layer.
+   Uses the individual `translate` / `scale` / `rotate` properties so it never
+   overrides the `transform` hover effects already in styles.css.
+   Everything here switches off for visitors who ask for reduced motion.
+   ========================================================================== */
+
+/* smooth page-to-page transitions (Chrome / Edge / Safari 18+; others just load normally) */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: vt-out .22s ease both; }
+::view-transition-new(root) { animation: vt-in .32s ease both; }
+@keyframes vt-out { to { opacity: 0; translate: 0 -8px; } }
+@keyframes vt-in { from { opacity: 0; translate: 0 12px; } }
+
+@media (prefers-reduced-motion: no-preference) {
+
+  /* ---------- scroll reveal ---------- */
+  .m-on [data-reveal] {
+    opacity: 0; translate: 0 28px;
+    transition: opacity .7s cubic-bezier(.2, .7, .2, 1), translate .7s cubic-bezier(.2, .7, .2, 1);
+    transition-delay: calc(var(--i, 0) * 70ms);
+  }
+  .m-on [data-reveal="left"] { translate: -36px 0; }
+  .m-on [data-reveal="right"] { translate: 36px 0; }
+  .m-on [data-reveal="pop"] { translate: 0 0; scale: .9; transition-property: opacity, scale; }
+  .m-on [data-reveal].is-in { opacity: 1; translate: 0 0; scale: 1; }
+
+  /* ---------- big outlined section titles: words drift apart as you scroll ---------- */
+  .m-on .sec-title__text > span { transition: translate .1s linear; will-change: translate; }
+  .m-on .sec-title__text > .sec-title__ghost:first-child { translate: calc(var(--drift, 0) * -70px) 0; }
+  .m-on .sec-title__text > .sec-title__ghost:last-child { translate: calc(var(--drift, 0) * 70px) 0; }
+  .m-on .sec-title__text > span:not(.sec-title__ghost) { scale: calc(1 + (1 - var(--seen, 1)) * .08); opacity: calc(.35 + var(--seen, 1) * .65); }
+
+  /* ---------- home hero ---------- */
+  .m-on .hero { overflow: hidden; }
+  .m-on .hero__kv { animation: kv-in 1.4s cubic-bezier(.2, .7, .2, 1) both; translate: 0 var(--para, 0px); will-change: translate; }
+  @keyframes kv-in { from { scale: 1.08; opacity: .4; } to { scale: 1; opacity: 1; } }
+  .m-on .event-date__text { background: linear-gradient(90deg, var(--ink) 0 40%, var(--pink) 50%, var(--ink) 60% 100%) 0 0 / 300% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shimmer 5s ease-in-out 1s infinite; }
+  @keyframes shimmer { 0%, 70% { background-position: 100% 0; } 100% { background-position: 0 0; } }
+  .m-on .event-date__text time { display: inline-block; animation: rise .8s cubic-bezier(.2, .8, .2, 1.2) both; }
+  .m-on .event-date__text time + time { animation-delay: .12s; }
+  .m-on .event-date__sub, .m-on .hero-cta, .m-on .countdown { animation: rise .7s .25s cubic-bezier(.2, .7, .2, 1) both; }
+  @keyframes rise { from { opacity: 0; translate: 0 18px; } }
+
+  /* ---------- inner page heroes ---------- */
+  .m-on .join-hero__inner > * { animation: rise .7s cubic-bezier(.2, .7, .2, 1) both; }
+  .m-on .join-hero__inner > :nth-child(2) { animation-delay: .06s; }
+  .m-on .join-hero__inner > :nth-child(3) { animation-delay: .12s; }
+  .m-on .join-hero__inner > :nth-child(4) { animation-delay: .18s; }
+  .m-on .join-hero__inner > :nth-child(5) { animation-delay: .24s; }
+  .m-on .join-hero__bg { animation: kv-in 1.6s cubic-bezier(.2, .7, .2, 1) both; translate: 0 var(--para, 0px); }
+  .m-on .join-hero__mascot { animation: mascot-in .9s .15s cubic-bezier(.2, .8, .2, 1.1) both, bob 5s 1.2s ease-in-out infinite; }
+  .m-on .join-hero__chibi { animation: mascot-in .9s .3s cubic-bezier(.2, .8, .2, 1.2) both, bob 4s 1.4s ease-in-out infinite reverse; }
+  @keyframes mascot-in { from { opacity: 0; translate: 40px 30px; } }
+  @keyframes bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -10px; } }
+
+  /* ---------- floating characters & sparkles ---------- */
+  .m-on .join-promo__chibi, .m-on .otrio-card__art img, .m-on .popup__art img { animation: bob 4.5s ease-in-out infinite; }
+  .m-on .otrio-card:nth-child(2) .otrio-card__art img { animation-delay: -1.5s; }
+  .m-on .otrio-card:nth-child(3) .otrio-card__art img { animation-delay: -3s; }
+  .m-on .sparkle { animation: twinkle 2.6s ease-in-out infinite; }
+  .m-on .sparkle:nth-of-type(2n) { animation-delay: -1.3s; animation-duration: 3.2s; }
+  @keyframes twinkle { 0%, 100% { scale: 1; rotate: 0deg; opacity: 1; } 50% { scale: .6; rotate: 45deg; opacity: .55; } }
+  .m-on .zone-card__stamp { animation: stamp 6s ease-in-out infinite; }
+  @keyframes stamp { 0%, 100% { rotate: 0deg; } 50% { rotate: 8deg; } }
+
+  /* ---------- buttons: light sweep + press ---------- */
+  .m-on .btn { overflow: hidden; isolation: isolate; }
+  .m-on .btn:not(.venue3d__play) { position: relative; }
+  .m-on .btn::before {
+    content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, .45) 50%, transparent 70%);
+    translate: -120% 0; transition: translate .6s ease;
+  }
+  .m-on .btn:hover::before { translate: 120% 0; }
+  .m-on .btn:active { scale: .97; }
+  .m-on .btn-tickets { animation: nudge 6s 3s ease-in-out infinite; }
+  @keyframes nudge { 0%, 90%, 100% { rotate: 0deg; } 92% { rotate: -4deg; } 94% { rotate: 4deg; } 96% { rotate: -2deg; } }
+
+  /* ---------- 3D tilt cards (desktop pointer only, set by motion.js) ---------- */
+  .m-tilt { transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .35s cubic-bezier(.2, .7, .2, 1), box-shadow .35s ease; transform-style: preserve-3d; }
+  .m-tilt.is-tilting { transition: transform .08s linear, box-shadow .35s ease; box-shadow: 0 22px 40px color-mix(in srgb, var(--night) 22%, transparent); }
+  .m-tilt .m-glare { position: absolute; inset: 0; pointer-events: none; z-index: 5; border-radius: inherit; opacity: 0; transition: opacity .3s ease; background: radial-gradient(circle at var(--gx, 50%) var(--gy, 50%), rgba(255, 255, 255, .35), transparent 55%); }
+  .m-tilt.is-tilting .m-glare { opacity: 1; }
+
+  /* ---------- header & progress ---------- */
+  .site-header { transition: box-shadow .3s ease; }
+  .site-header.is-scrolled { box-shadow: 0 8px 24px rgba(0, 0, 0, .08); }
+  .m-progress { position: fixed; left: 0; top: 0; z-index: 100; width: 100%; height: 3px; pointer-events: none; transform-origin: 0 50%; scale: var(--p, 0) 1; background: linear-gradient(90deg, var(--blue), var(--pink), var(--yellow)); }
+
+  /* ---------- active map pin pulse ---------- */
+  .imap-pin.is-active circle { animation: pin 1.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  @keyframes pin { 50% { scale: 1.18; } }
+
+  /* ---------- click sparkles on main buttons ---------- */
+  .m-burst { position: fixed; z-index: 200; width: 0; height: 0; pointer-events: none; }
+  .m-burst i { position: absolute; left: -5px; top: -5px; width: 10px; height: 10px; background: var(--c, var(--yellow)); clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%); animation: burst .65s cubic-bezier(.2, .7, .2, 1) forwards; }
+  @keyframes burst { from { translate: 0 0; scale: 1.3; opacity: 1; } to { translate: var(--x) var(--y); scale: .2; opacity: 0; rotate: 120deg; } }
+
+  /* ---------- home marquee strip ---------- */
+  .m-marquee { overflow: hidden; background: var(--blue); color: var(--yellow); padding: 14px 0; white-space: nowrap; font-family: var(--font-display); font-stretch: 125%; font-weight: 900; font-size: clamp(14px, 2vw, 20px); rotate: -1.2deg; margin: 10px -10px 30px; box-shadow: 0 10px 0 var(--pink); }
+  .m-marquee div { display: inline-block; animation: m-marquee 30s linear infinite; }
+  .m-marquee:hover div { animation-play-state: paused; }
+  @keyframes m-marquee { to { translate: -50% 0; } }
+}
+
+/* reduced motion: the marquee still shows, standing still */
+@media (prefers-reduced-motion: reduce) {
+  .m-marquee { overflow: hidden; background: var(--blue); color: var(--yellow); padding: 14px 0; white-space: nowrap; font-family: var(--font-display); font-stretch: 125%; font-weight: 900; font-size: clamp(14px, 2vw, 20px); margin: 10px 0 30px; }
+  .m-progress { display: none; }
+}
