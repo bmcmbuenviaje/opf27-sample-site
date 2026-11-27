@@ -1,4 +1,4 @@
-<!--meta {"title": "Home", "nav": "home", "desc": "Otaku Pop Fes 2027 — Get Isekaied! A two-day celebration of anime, games, cosplay and music on June 5–6, 2027 at Okada Manila."} -->
+<!--meta {"title": "Home", "nav": "home", "js": ["popup.js"], "desc": "Otaku Pop Fes 2027 — Get Isekaied! A two-day celebration of anime, games, cosplay and music on June 5–6, 2027 at Okada Manila."} -->
     <div class="live-bar" data-phase-only="event">
       <div class="container"><span class="live-dot" aria-hidden="true"></span><span><strong>Live now · Day 1</strong> — Cosplay Cup Qualifiers on the Crystal Stage at 13:30. Music Live doors open 17:30.</span></div>
     </div>
@@ -162,3 +162,50 @@
         </div>
       </div>
     </section>
+
+    <!-- ===== Pop-up (sample) ===== -->
+    <div class="popup" data-popup="home-2027" role="dialog" aria-modal="true" aria-labelledby="popup-title" hidden>
+      <div class="popup__box">
+        <button type="button" class="popup__x" data-popup-close aria-label="Close">×</button>
+        <div class="popup__art" aria-hidden="true">
+          <img src="assets/img/mascot-popi.webp" alt="" width="609" height="900">
+          <svg class="sparkle sparkle--yellow" style="left:12%;top:14%" aria-hidden="true"><use href="#i-sparkle"/></svg>
+          <svg class="sparkle sparkle--pink" style="right:10%;bottom:22%;width:22px;height:22px" aria-hidden="true"><use href="#i-sparkle"/></svg>
+        </div>
+        <div class="popup__content">
+          <div data-phase-only="announce">
+            <p class="popup__eyebrow">Early bird ends Dec 15</p>
+            <h2 class="popup__title display" id="popup-title">Be first through the portal</h2>
+            <p>Get lineup reveals, the ticket drop date and early-bird deals before anyone else.</p>
+          </div>
+          <div data-phase-only="onsale">
+            <p class="popup__eyebrow">Early-bird passes</p>
+            <h2 class="popup__title display">Save up to 20% before March 31</h2>
+            <p>Sign up and we'll send you a reminder 48 hours before early-bird prices end.</p>
+          </div>
+          <div data-phase-only="event">
+            <p class="popup__eyebrow">Live now</p>
+            <h2 class="popup__title display">Day 1 is happening!</h2>
+            <p>Get stage alerts and last-minute announcements while you're at the venue.</p>
+          </div>
+          <div data-phase-only="post">
+            <p class="popup__eyebrow">See you next year</p>
+            <h2 class="popup__title display">OPF 2028 — get notified</h2>
+            <p>Be the first to know the dates, venue and early-bird tickets for next year.</p>
+          </div>
+          <form class="popup__form" novalidate>
+            <label class="sr-only" for="popup-email">Email address</label>
+            <input id="popup-email" type="email" placeholder="you@email.com" autocomplete="email" data-autofocus data-private>
+            <button type="submit" class="btn btn--pink">Notify me</button>
+            <p class="popup__err">Please enter a valid email address.</p>
+          </form>
+          <p class="popup__small">No spam — a few emails before the event. <button type="button" class="popup__skip" data-popup-close>No thanks</button></p>
+        </div>
+        <div class="popup__done" hidden tabindex="-1">
+          <p class="popup__eyebrow">You're on the list</p>
+          <h2 class="popup__title display">See you in the new worlds!</h2>
+          <p>(Sample site — nothing was sent.)</p>
+          <button type="button" class="btn btn--blue" data-popup-close>Close</button>
+        </div>
+      </div>
+    </div>

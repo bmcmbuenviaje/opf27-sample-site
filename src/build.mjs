@@ -183,12 +183,45 @@ const samplePanel = `
         <button type="button" data-set-palette="sunset" aria-pressed="false" title="Example: sunset" style="background:linear-gradient(135deg,#D9381E 50%,#1D3FBF 50%)"><span class="sr-only">Example palette: sunset</span></button>
         <button type="button" data-set-palette="forest" aria-pressed="false" title="Example: forest" style="background:linear-gradient(135deg,#0E6B4F 50%,#F2668B 50%)"><span class="sr-only">Example palette: forest</span></button>
       </div>
+      <p class="sample-panel__label">Pop-up, cookies &amp; analytics</p>
+      <div class="sample-panel__row">
+        <button type="button" class="btn btn--small btn--blue" data-sample="popup">Show home pop-up</button>
+        <button type="button" class="btn btn--small sample-panel__line" data-sample="cookies">Reset cookie choice</button>
+      </div>
+      <p class="sample-panel__status" data-sample-status></p>
+      <p class="sample-panel__label">Landing page samples</p>
+      <div class="sample-panel__row">
+        <a class="btn btn--small btn--pink" href="lp-ticket-drop.html">A · Ticket drop</a>
+        <a class="btn btn--small sample-panel__line" href="lp-cosplay-cup.html">B · Cosplay Cup</a>
+      </div>
     </div>
     <button class="sample-panel__toggle" type="button" aria-expanded="false" aria-controls="sample-panel"><i></i><span>Sample controls</span></button>
   </div>`;
 
+// campaign landing pages: no main menu, one call to action, slim footer
+function lpHeader(meta) {
+  return `
+  <p class="sample-ribbon"><b>Sample landing page</b> · Proposal KV · Placeholder content · <a href="index.html" style="color:inherit">Back to the sample site</a></p>
+  <header class="lp-header">
+    <div class="container lp-header__inner">
+      <a class="lp-header__logo" href="index.html" aria-label="Otaku Pop Fes home"><img src="assets/img/logo.png" alt="Otaku Pop Fes" width="616" height="126"></a>
+      ${meta.cta ? `<a class="btn btn--pink btn--small" href="${meta.cta[0]}" data-track="lp_header_cta">${meta.cta[1]}</a>` : ''}
+    </div>
+  </header>`;
+}
+const lpFooter = `
+  <footer class="lp-footer">
+    <div class="footer-bar">
+      <p>© 2027 Otaku Pop Fes Executive Committee · June 5–6, 2027 · Okada Manila</p>
+      <p><a href="legal.html#privacy">Privacy Policy</a></p><p><a href="legal.html#terms">Terms of Use</a></p>
+      <p class="demo-note">Sample landing page by Mineski Global for CyberE — placeholder content.</p>
+    </div>
+  </footer>`;
+
 function page(file, meta, body) {
   const js = (meta.js || []).map((s) => `\n  <script src="assets/js/${s}?v=${V}" defer></script>`).join('');
+  const css = (meta.css || []).map((s) => `\n  <link rel="stylesheet" href="assets/css/${s}?v=${V}">`).join('');
+  const isLP = meta.layout === 'landing';
   return `<!doctype html>
 <html lang="en" data-phase="announce">
 <head>
@@ -205,22 +238,23 @@ function page(file, meta, body) {
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,800..900&amp;family=Montserrat:wght@400;500;600;700;800;900&amp;display=swap">
   <link rel="stylesheet" href="assets/css/tokens.css?v=${V}">
   <link rel="stylesheet" href="assets/css/styles.css?v=${V}">
-  <link rel="stylesheet" href="assets/css/pages.css?v=${V}">
+  <link rel="stylesheet" href="assets/css/pages.css?v=${V}">${css}
   <script>try{var p=localStorage.getItem('opf-phase');if(p)document.documentElement.dataset.phase=p}catch(e){}</script>
+  <script src="assets/js/consent.js?v=${V}" defer></script>
   <script src="assets/js/main.js?v=${V}" defer></script>
   <script src="assets/js/site.js?v=${V}" defer></script>
   <script src="assets/js/map.js?v=${V}" defer></script>${js}
 </head>
-<body>
+<body${meta.bodyClass ? ` class="${meta.bodyClass}"` : ''}>
   ${sprite}
 
   <a class="skip-link" href="#main">Skip to content</a>
-${header(file, meta.nav)}
+${isLP ? lpHeader(meta) : header(file, meta.nav)}
 
   <main id="main">
 ${body}
   </main>
-${footer}
+${isLP ? lpFooter : footer}
 ${samplePanel}
   <div class="toast" role="status" aria-live="polite"></div>
 </body>

@@ -12,13 +12,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,800..900&amp;family=Montserrat:wght@400;500;600;700;800;900&amp;display=swap">
-  <link rel="stylesheet" href="assets/css/tokens.css?v=mwyw3qwp">
-  <link rel="stylesheet" href="assets/css/styles.css?v=mwyw3qwp">
-  <link rel="stylesheet" href="assets/css/pages.css?v=mwyw3qwp">
+  <link rel="stylesheet" href="assets/css/tokens.css?v=mwywx2yu">
+  <link rel="stylesheet" href="assets/css/styles.css?v=mwywx2yu">
+  <link rel="stylesheet" href="assets/css/pages.css?v=mwywx2yu">
   <script>try{var p=localStorage.getItem('opf-phase');if(p)document.documentElement.dataset.phase=p}catch(e){}</script>
-  <script src="assets/js/main.js?v=mwyw3qwp" defer></script>
-  <script src="assets/js/site.js?v=mwyw3qwp" defer></script>
-  <script src="assets/js/map.js?v=mwyw3qwp" defer></script>
+  <script src="assets/js/consent.js?v=mwywx2yu" defer></script>
+  <script src="assets/js/main.js?v=mwywx2yu" defer></script>
+  <script src="assets/js/site.js?v=mwywx2yu" defer></script>
+  <script src="assets/js/map.js?v=mwywx2yu" defer></script>
 </head>
 <body>
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -299,6 +300,17 @@
         <button type="button" data-set-palette="violet" aria-pressed="false" title="Example: violet" style="background:linear-gradient(135deg,#4B1FB8 50%,#FF5A8A 50%)"><span class="sr-only">Example palette: violet</span></button>
         <button type="button" data-set-palette="sunset" aria-pressed="false" title="Example: sunset" style="background:linear-gradient(135deg,#D9381E 50%,#1D3FBF 50%)"><span class="sr-only">Example palette: sunset</span></button>
         <button type="button" data-set-palette="forest" aria-pressed="false" title="Example: forest" style="background:linear-gradient(135deg,#0E6B4F 50%,#F2668B 50%)"><span class="sr-only">Example palette: forest</span></button>
+      </div>
+      <p class="sample-panel__label">Pop-up, cookies &amp; analytics</p>
+      <div class="sample-panel__row">
+        <button type="button" class="btn btn--small btn--blue" data-sample="popup">Show home pop-up</button>
+        <button type="button" class="btn btn--small sample-panel__line" data-sample="cookies">Reset cookie choice</button>
+      </div>
+      <p class="sample-panel__status" data-sample-status></p>
+      <p class="sample-panel__label">Landing page samples</p>
+      <div class="sample-panel__row">
+        <a class="btn btn--small btn--pink" href="lp-ticket-drop.html">A · Ticket drop</a>
+        <a class="btn btn--small sample-panel__line" href="lp-cosplay-cup.html">B · Cosplay Cup</a>
       </div>
     </div>
     <button class="sample-panel__toggle" type="button" aria-expanded="false" aria-controls="sample-panel"><i></i><span>Sample controls</span></button>

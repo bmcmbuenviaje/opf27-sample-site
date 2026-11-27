@@ -63,7 +63,11 @@
   const annc = $('.annc');
   if (annc) {
     if (store.get('opf-annc-closed') === '1') annc.hidden = true;
-    $('.annc__close', annc)?.addEventListener('click', () => { annc.hidden = true; store.set('opf-annc-closed', '1'); });
+    $('.annc__close', annc)?.addEventListener('click', () => {
+      annc.hidden = true;
+      const c = window.opfConsent && window.opfConsent.get();
+      if (c && c.preferences) store.set('opf-annc-closed', '1');   // only remembered with preference consent
+    });
   }
 
   /* ---------- header dropdowns (tap support) ---------- */
@@ -239,3 +243,28 @@ document.addEventListener('click', (e) => {
   box.classList.add('is-live');
   f.focus();
 });
+
+/* sample controls: pop-up, cookie reset, analytics status */
+(function () {
+  const status = document.querySelector('[data-sample-status]');
+  const render = () => {
+    if (!status) return;
+    const c = window.opfConsent && window.opfConsent.get();
+    const key = window.OPF_ANALYTICS && window.OPF_ANALYTICS.key;
+    status.textContent = !c ? 'Cookies: no choice yet — banner showing.'
+      : c.analytics ? (key ? 'Analytics: ON — PostHog is recording this visit.' : 'Analytics: allowed — no PostHog key set yet, so nothing is recorded.')
+      : 'Analytics: OFF — ' + (c.preferences ? 'necessary + preference cookies only.' : 'strictly necessary only.');
+  };
+  render();
+  window.opfConsent && window.opfConsent.onChange(render);
+  document.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-sample]');
+    if (!b) return;
+    if (b.dataset.sample === 'cookies') { window.opfConsent.reset(); render(); window.opfToast && window.opfToast('Cookie choice cleared — the banner is back.'); }
+    if (b.dataset.sample === 'popup') {
+      if (window.opfShowPopup) { document.querySelector('.sample-panel__body').hidden = true; window.opfShowPopup(); }
+      else location.href = 'index.html#show-popup';
+    }
+  });
+  if (location.hash === '#show-popup') setTimeout(() => { if (!window.opfShowPopup) return; history.replaceState(null, '', location.pathname); window.opfShowPopup(); }, 600);
+})();
