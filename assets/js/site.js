@@ -261,10 +261,16 @@ document.addEventListener('click', (e) => {
     const b = e.target.closest('[data-sample]');
     if (!b) return;
     if (b.dataset.sample === 'cookies') { window.opfConsent.reset(); render(); window.opfToast && window.opfToast('Cookie choice cleared — the banner is back.'); }
+    if (b.dataset.sample === 'nudge') {
+      document.querySelector('.sample-panel__body').hidden = true;
+      if (/^merch/.test(location.pathname.split('/').pop())) { window.opfToast && window.opfToast('This reminder shows on other pages after you leave Merch — opening the home page.'); setTimeout(() => { location.href = 'index.html#show-nudge'; }, 1200); }
+      else window.opfShowMerchNudge && window.opfShowMerchNudge();
+    }
     if (b.dataset.sample === 'popup') {
       if (window.opfShowPopup) { document.querySelector('.sample-panel__body').hidden = true; window.opfShowPopup(); }
       else location.href = 'index.html#show-popup';
     }
   });
+  if (location.hash === '#show-nudge') setTimeout(() => { history.replaceState(null, '', location.pathname); window.opfShowMerchNudge && window.opfShowMerchNudge(); }, 700);
   if (location.hash === '#show-popup') setTimeout(() => { if (!window.opfShowPopup) return; history.replaceState(null, '', location.pathname); window.opfShowPopup(); }, 600);
 })();

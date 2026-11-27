@@ -25,6 +25,8 @@
 
   function open(source) {
     if (shown) return;
+    // another pop-up (e.g. the merch reminder) is open: try again later instead of stacking
+    if (document.querySelector('.popup.is-open:not([data-popup])')) { setTimeout(() => open(source), 9000); return; }
     shown = true;
     clearTimeout(timer);
     lastFocus = document.activeElement;

@@ -188,12 +188,14 @@ const samplePanel = `
       <div class="sample-panel__row">
         <button type="button" class="btn btn--small btn--blue" data-sample="popup">Show home pop-up</button>
         <button type="button" class="btn btn--small sample-panel__line" data-sample="cookies">Reset cookie choice</button>
+        <button type="button" class="btn btn--small sample-panel__line" data-sample="nudge">Show merch reminder</button>
       </div>
       <p class="sample-panel__status" data-sample-status></p>
       <p class="sample-panel__label">Landing page samples</p>
       <div class="sample-panel__row">
         <a class="btn btn--small btn--pink" href="lp-ticket-drop.html">A · Ticket drop</a>
         <a class="btn btn--small sample-panel__line" href="lp-cosplay-cup.html">B · Cosplay Cup</a>
+        <a class="btn btn--small sample-panel__line" href="lp-merch-preorder.html">C · Merch pre-order</a>
       </div>
     </div>
     <button class="sample-panel__toggle" type="button" aria-expanded="false" aria-controls="sample-panel"><i></i><span>Sample controls</span></button>
@@ -249,6 +251,7 @@ function page(file, meta, body) {
   <script src="assets/js/site.js?v=${V}" defer></script>
   <script src="assets/js/map.js?v=${V}" defer></script>${ext}${js}
   <script src="assets/js/motion.js?v=${V}" defer></script>
+  <script src="assets/js/merch-nudge.js?v=${V}" defer></script>
 </head>
 <body${meta.bodyClass ? ` class="${meta.bodyClass}"` : ''}>
   ${sprite}

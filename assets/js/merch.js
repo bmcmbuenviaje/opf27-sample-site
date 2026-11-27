@@ -39,7 +39,7 @@
   const toast = (m) => window.opfToast && window.opfToast(m);
 
   // shared with the shelf-tag page
-  window.opfMerch = { PRODUCTS, SHELVES };
+  window.opfMerch = { PRODUCTS, SHELVES, art: (p) => art(p), peso: (n) => '₱' + n.toLocaleString('en-PH') };
   window.opfQr = qrSvg;
   if (!app) return;
 
@@ -58,8 +58,18 @@
   /* ---------- cart (kept for this visit only) ---------- */
   const CART_KEY = 'opf-merch-cart';
   let cart = [];
-  try { cart = JSON.parse(sessionStorage.getItem(CART_KEY)) || []; } catch (e) { cart = []; }
-  const saveCart = () => { try { sessionStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch (e) { /* ignore */ } renderCart(); };
+  // The bag survives closing the browser when the visitor allowed preference cookies;
+  // otherwise it lasts for this visit only. (The real build also keeps it server-side by email.)
+  const prefsOK = () => { const c = window.opfConsent && window.opfConsent.get(); return !!(c && c.preferences); };
+  const readCart = () => { try { return JSON.parse(localStorage.getItem(CART_KEY) || sessionStorage.getItem(CART_KEY)) || []; } catch (e) { return []; } };
+  cart = readCart().filter((l) => bySku[l.sku]);
+  const saveCart = () => {
+    try {
+      sessionStorage.setItem(CART_KEY, JSON.stringify(cart));
+      if (prefsOK()) localStorage.setItem(CART_KEY, JSON.stringify(cart)); else localStorage.removeItem(CART_KEY);
+    } catch (e) { /* ignore */ }
+    renderCart();
+  };
   const cartCount = () => cart.reduce((n, l) => n + l.qty, 0);
   const cartTotal = () => cart.reduce((n, l) => n + bySku[l.sku].price * l.qty, 0);
   function addToCart(sku, size, qty = 1) {
@@ -198,6 +208,7 @@
     const lines = cart.map((l) => `<li>${l.qty} × ${bySku[l.sku].name}${l.size ? ' · ' + l.size : ''}</li>`).join('');
     const total = cartTotal();
     track('merch_order_placed', { mode: m, paid, total, items: cartCount() });
+    try { sessionStorage.setItem('opf-merch-ordered', '1'); } catch (e) { /* ignore */ }
     cart = []; saveCart(); closeCart();
     checkout.hidden = true; $('.mcart__view--bag', drawer).hidden = false;
 
@@ -260,8 +271,21 @@
   function refresh() { renderCatalog(); renderCart(); }
   new MutationObserver(refresh).observe(root, { attributes: true, attributeFilter: ['data-phase'] });
   refresh();
+  try { if (root.dataset.phase === 'onsale' && !sessionStorage.getItem('opf-merch-visit')) sessionStorage.setItem('opf-merch-visit', String(Date.now())); } catch (e) { /* ignore */ }
 
-  const sku = new URLSearchParams(location.search).get('sku');
+  // deep links: ?add=SKU (from the pre-order landing page) and ?bag=1 (from the reminder pop-up)
+  const params = new URLSearchParams(location.search);
+  if (params.get('add') || params.get('bag')) {
+    if (root.dataset.phase !== 'onsale' && root.dataset.phase !== 'event') root.dataset.phase = 'onsale';
+    setTimeout(() => {
+      const add = (params.get('add') || '').toUpperCase();
+      if (bySku[add]) addToCart(add, params.get('size') || (bySku[add].sizes ? bySku[add].sizes[Math.min(1, bySku[add].sizes.length - 1)] : ''));
+      openCart();
+      history.replaceState(null, '', location.pathname);
+    }, 350);
+  }
+
+  const sku = params.get('sku');
   if (sku) {
     // a shelf QR always means "we're at the venue": show the event-day ordering view
     if (root.dataset.phase !== 'event') { root.dataset.phase = 'event'; }
