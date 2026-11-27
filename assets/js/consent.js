@@ -6,8 +6,8 @@
    Leave it empty and the site behaves exactly the same but records nothing. */
 window.OPF_ANALYTICS = window.OPF_ANALYTICS || {
   provider: 'posthog',
-  key: '',                                   // e.g. 'phc_xxxxxxxxxxxxxxxxxxxxxxxx'
-  host: 'https://us.i.posthog.com',          // or https://eu.i.posthog.com, or your self-hosted URL
+  key: 'phc_Dea5GD94KoEaKa9D8QTqMvQmGykUBwSYtXze8vBTk63C',   // PostHog project token (public, write-only)
+  host: 'https://us.i.posthog.com',          // US Cloud (project 771928)
 };
 
 (function () {
@@ -52,10 +52,13 @@ window.OPF_ANALYTICS = window.OPF_ANALYTICS || {
       .forEach((m) => { ph[m] = function () { ph.push([m].concat([].slice.call(arguments))); }; });
     const s = document.createElement('script');
     s.async = true;
+    s.crossOrigin = 'anonymous';
+    ph.__SV = 1;
     s.src = cfg.host.replace('.i.posthog.com', '-assets.i.posthog.com') + '/static/array.js';
     document.head.appendChild(s);
     ph.init(cfg.key, {
       api_host: cfg.host,
+      defaults: '2026-05-30',               // PostHog's recommended defaults as of this setup
       person_profiles: 'identified_only',   // anonymous visitors are not turned into profiles
       capture_pageview: true,
       autocapture: true,                     // clicks, form submits, rage clicks → heatmaps
