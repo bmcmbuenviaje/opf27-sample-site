@@ -1,0 +1,16 @@
+<!--meta {"title": "Merch Hub shelf tags", "nav": "merch", "css": ["merch.css"], "js": ["merch.js", "merch-tags.js"], "ext": ["https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"], "desc": "Printable QR shelf tags for the OPF 2027 Merch Hub samples."} -->
+    <section class="section" style="padding-top:40px">
+      <div class="container">
+        <ol class="crumbs" style="color:var(--muted)"><li><a href="index.html">Home</a></li><li><a href="merch.html">Merch</a></li><li aria-current="page">Shelf tags</li></ol>
+        <h1 class="display" style="margin:0 0 10px;font-size:clamp(30px,5vw,56px)">Shelf QR tags</h1>
+        <p class="lead" style="margin:0 0 20px;text-align:left">Ops sample: one tag per display sample (Phase 02 of the hybrid retail blueprint). Scanning opens that item in the Scan-to-Order view, ready to add. Signage text and shelf letters match the web app.</p>
+        <p><button type="button" class="btn btn--blue" onclick="window.print()">Print tags</button> <a class="btn btn--pink" href="merch.html?sku=A-TEE">Test a scan</a></p>
+        <div class="msign">
+          <p class="msign__big display">Scan to order.</p>
+          <p class="msign__sub">Ready at the counter.</p>
+          <div class="msign__qr" data-qr="merch.html"></div>
+          <p class="msign__url">Entrance standee · links to the Merch Hub</p>
+        </div>
+        <div class="mtags" data-merch-tags></div>
+      </div>
+    </section>

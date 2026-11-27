@@ -64,6 +64,7 @@ function fixLinks(html) {
 const NAV = [
   { key: 'event', label: 'Event', sub: [['exhibition.html', 'Exhibition'], ['cosplay-cup.html', 'Cosplay Cup'], ['music-live.html', 'Music Live'], ['schedule.html', 'Schedule &amp; Map']] },
   { key: 'tickets', label: 'Tickets', href: 'tickets.html' },
+  { key: 'merch', label: 'Merch', href: 'merch.html' },
   { key: 'news', label: 'News', href: 'news.html' },
   { key: 'visit', label: 'Visit', sub: [['access.html', 'Access &amp; Venue'], ['faq.html', 'FAQ &amp; House Rules']] },
   { key: 'join', label: 'Join Us', href: 'join-us.html' },
@@ -147,7 +148,7 @@ const footer = `
           <p><strong>June 5–6, 2027 · 10:00–22:00</strong><br>Okada Manila — Crystal Pavilion, Grand Ballroom &amp; Cove Manila</p>
           <p>Brought from Japan by CyberE Inc. · Organized by Mineski Global</p>
         </div>
-        <div><h2>Event</h2><ul><li><a href="exhibition.html">Exhibition</a></li><li><a href="cosplay-cup.html">Cosplay Cup</a></li><li><a href="music-live.html">Music Live</a></li><li><a href="schedule.html">Schedule &amp; Map</a></li><li><a href="tickets.html">Tickets</a></li></ul></div>
+        <div><h2>Event</h2><ul><li><a href="exhibition.html">Exhibition</a></li><li><a href="cosplay-cup.html">Cosplay Cup</a></li><li><a href="music-live.html">Music Live</a></li><li><a href="schedule.html">Schedule &amp; Map</a></li><li><a href="tickets.html">Tickets</a></li><li><a href="merch.html">Merch</a></li></ul></div>
         <div><h2>Visit</h2><ul><li><a href="access.html">Access &amp; Venue</a></li><li><a href="faq.html">FAQ &amp; House Rules</a></li><li><a href="news.html">News</a></li><li><a href="archive.html">Past Events</a></li></ul></div>
         <div><h2>Work with us</h2><ul><li><a href="join-us.html">Join Us (Exhibitors)</a></li><li><a href="sponsors.html">Sponsors &amp; Partners</a></li><li><a href="contact.html">Contact</a></li></ul></div>
         <div>
@@ -222,6 +223,8 @@ function page(file, meta, body) {
   const js = (meta.js || []).map((s) => `\n  <script src="assets/js/${s}?v=${V}" defer></script>`).join('');
   const css = (meta.css || []).map((s) => `\n  <link rel="stylesheet" href="assets/css/${s}?v=${V}">`).join('');
   const isLP = meta.layout === 'landing';
+  const ext = (meta.ext || []).map((u) => `
+  <script src="${u}" defer></script>`).join('');
   return `<!doctype html>
 <html lang="en" data-phase="announce">
 <head>
@@ -244,7 +247,7 @@ function page(file, meta, body) {
   <script src="assets/js/consent.js?v=${V}" defer></script>
   <script src="assets/js/main.js?v=${V}" defer></script>
   <script src="assets/js/site.js?v=${V}" defer></script>
-  <script src="assets/js/map.js?v=${V}" defer></script>${js}
+  <script src="assets/js/map.js?v=${V}" defer></script>${ext}${js}
   <script src="assets/js/motion.js?v=${V}" defer></script>
 </head>
 <body${meta.bodyClass ? ` class="${meta.bodyClass}"` : ''}>

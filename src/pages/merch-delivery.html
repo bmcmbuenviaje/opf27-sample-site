@@ -1,0 +1,64 @@
+<!--meta {"title": "Arrange delivery", "nav": "merch", "css": ["merch.css"], "desc": "Arrange delivery for an uncollected, paid OPF 2027 merch pre-order."} -->
+    <section class="section" style="padding-top:40px">
+      <div class="container">
+        <ol class="crumbs" style="color:var(--muted)"><li><a href="index.html">Home</a></li><li><a href="merch.html">Merch</a></li><li aria-current="page">Arrange delivery</li></ol>
+        <div class="mdel">
+          <div>
+            <p class="mdel__label">Step 1 · The email (sent June 7 to paid, uncollected pre-orders only)</p>
+            <article class="memail" aria-label="Sample email">
+              <p class="memail__meta"><b>From:</b> Otaku Pop Fes &lt;merch@otakupopfes.com&gt;<br><b>Subject:</b> Your OPF 2027 merch is waiting — want it delivered?</p>
+              <div class="memail__body">
+                <img src="assets/img/logo.png" alt="Otaku Pop Fes" width="616" height="126">
+                <p>Hi <b>[Name]</b>,</p>
+                <p>Thank you for pre-ordering! We kept your paid order <b>OPF-P1043</b> for you until the end of the event, but it wasn't collected.</p>
+                <p>We can deliver it to you. Just tell us where by <b>[June 21, 2027 — date TBC]</b>. A shipping fee applies, based on your area, and you'll pay it through Slash.</p>
+                <p class="memail__cta"><a class="btn btn--pink" href="#delivery-form">Arrange delivery</a></p>
+                <p class="memail__small">If we don't hear from you by June 21, [placeholder: what happens next — e.g. we'll contact you once more, then the order is handled per the Ticket &amp; Merch Terms].</p>
+              </div>
+            </article>
+          </div>
+          <div id="delivery-form">
+            <p class="mdel__label">Step 2 · The delivery page</p>
+            <div class="form-card">
+              <h1 class="mdel__title">Deliver my order</h1>
+              <p class="mdel__order">Order <b>OPF-P1043</b> · 1 × OPF 2027 Event Tee (M) · 1 × Popi Plush · <span class="pill" style="--k:var(--opf-feedback-success)">Paid</span></p>
+              <form data-delivery novalidate>
+                <div class="fgrid">
+                  <div class="field"><label for="d-name">Recipient name *</label><input id="d-name" required autocomplete="name" data-private><p class="field__err">Please enter a name.</p></div>
+                  <div class="field"><label for="d-mobile">Mobile *</label><input id="d-mobile" type="tel" required autocomplete="tel" data-private><p class="field__err">Please enter a mobile number.</p></div>
+                  <div class="field full"><label for="d-street">House / unit, street, barangay *</label><input id="d-street" required autocomplete="street-address" data-private><p class="field__err">Please enter the address.</p></div>
+                  <div class="field"><label for="d-city">City / municipality *</label><input id="d-city" required autocomplete="address-level2" data-private><p class="field__err">Please enter the city.</p></div>
+                  <div class="field"><label for="d-zip">ZIP code *</label><input id="d-zip" required inputmode="numeric" autocomplete="postal-code" data-private><p class="field__err">Please enter the ZIP code.</p></div>
+                  <div class="field full"><label for="d-zone">Area *</label>
+                    <select id="d-zone" required>
+                      <option value="">Choose your area…</option>
+                      <option value="150">Metro Manila — ₱150</option>
+                      <option value="220">Rest of Luzon — ₱220</option>
+                      <option value="280">Visayas — ₱280</option>
+                      <option value="320">Mindanao — ₱320</option>
+                    </select><p class="field__err">Please choose your area.</p></div>
+                </div>
+                <div class="mdel__fee"><span>Shipping fee</span><b data-fee>—</b></div>
+                <p class="ticket-note">Sample rates. Delivery in 3–7 business days via [courier]. The merch itself is already paid — you only pay shipping.</p>
+                <button type="submit" class="btn btn--pink btn--block" data-track="merch_delivery_submit">Pay shipping with Slash</button>
+              </form>
+              <div class="form-done" hidden tabindex="-1"><h3>Delivery booked 📦</h3><p>We'll email your tracking number within 2 business days.<br><small>(Sample — no payment taken, nothing sent.)</small></p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script>
+      (function () {
+        var f = document.querySelector('[data-delivery]'); if (!f) return;
+        var zone = f.querySelector('#d-zone'), fee = f.querySelector('[data-fee]');
+        zone.addEventListener('change', function () { fee.textContent = zone.value ? '₱' + zone.value : '—'; });
+        f.addEventListener('submit', function (e) {
+          e.preventDefault(); var ok = true;
+          f.querySelectorAll('[required]').forEach(function (i) { var bad = !i.value.trim(); i.closest('.field').classList.toggle('has-error', bad); if (bad && ok) { i.focus(); ok = false; } });
+          if (!ok) return;
+          var btn = f.querySelector('[type=submit]'); btn.disabled = true; btn.textContent = 'Opening Slash… (simulated)';
+          setTimeout(function () { f.hidden = true; var d = f.parentElement.querySelector('.form-done'); d.hidden = false; d.focus(); }, 1200);
+        });
+      })();
+    </script>
