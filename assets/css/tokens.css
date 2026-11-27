@@ -1,0 +1,49 @@
+/* ==========================================================================
+   OPF 2027 — DESIGN TOKENS  (the "KV file")
+   --------------------------------------------------------------------------
+   Every colour and font on the sample site comes from this file.
+   When CyberE approves the final key visual:
+     1. Change the colour values below.
+     2. Change the font names (and add the @font-face / Google Fonts link in
+        src/build.mjs if the font is new).
+     3. Replace the images listed in KV-SWAP.md (same file names).
+   Nothing else needs to change. Same names as docs/opf27-tokens.css.
+   ========================================================================== */
+:root {
+  /* Brand */
+  --opf-brand-isekai-blue: #0031DB;   /* lead colour: header bands, buttons, frames */
+  --opf-brand-pop-yellow: #FCFD40;    /* highlights on blue / night */
+  --opf-brand-sakura-pink: #FC3D92;   /* accent fills, badges */
+  --opf-brand-portal-cyan: #22B7FD;   /* accent, Cove Manila */
+  --opf-brand-sakura-deep: #D6246F;   /* pink buttons with white text (AA) */
+  --opf-brand-cyan-deep: #0077B6;     /* cyan text on white (AA) */
+
+  /* Neutral */
+  --opf-neutral-ink: #242224;
+  --opf-neutral-night: #07103F;
+  --opf-neutral-muted: #5B5A63;
+  --opf-neutral-line: #D6D8E0;
+  --opf-neutral-mist-2: #E6EAF8;
+  --opf-neutral-mist: #F2F4FB;
+  --opf-neutral-white: #FFFFFF;
+
+  /* Feedback */
+  --opf-feedback-error: #C81E3A;
+  --opf-feedback-success: #1A7F4B;
+  --opf-feedback-warning: #B45309;
+
+  /* Venue colour coding (Discover / Connect / Celebrate) */
+  --opf-venue-discover: var(--opf-brand-isekai-blue);
+  --opf-venue-connect: var(--opf-brand-sakura-deep);
+  --opf-venue-celebrate: var(--opf-brand-portal-cyan);
+
+  /* Type — Akira Expanded is the licensed KV font; Archivo (expanded, 900) stands in */
+  --opf-font-display: "Akira Expanded", "Archivo", "Arial Black", sans-serif;
+  --opf-font-body: "Montserrat", "Segoe UI", Arial, sans-serif;
+
+  /* Shape */
+  --opf-radius-sm: 8px;
+  --opf-radius-md: 12px;
+  --opf-radius-lg: 16px;
+  --opf-radius-pill: 999px;
+}

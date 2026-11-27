@@ -1,0 +1,32 @@
+<!--meta {"title": "News", "nav": "news", "desc": "Latest Otaku Pop Fes 2027 announcements: lineup, tickets, cosplay and exhibitors."} -->
+{{hero}}{"title": "News", "eyebrow": "Posted once in the CMS — shared to Facebook automatically", "lead": "Announcements, lineup reveals, ticket news and exhibitor updates.", "img": "news-save-the-date.jpg", "chibi": "chibi-otori.webp"}{{/hero}}
+
+    <section class="section" aria-labelledby="nl-title">
+      {{title nl-title Latest}}
+      <div class="container">
+        <div class="filters" data-filter-target="#news-list" role="group" aria-label="Filter news">
+          <button type="button" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" data-filter="announcement" aria-pressed="false">Announcement</button>
+          <button type="button" data-filter="lineup" aria-pressed="false">Lineup</button>
+          <button type="button" data-filter="tickets" aria-pressed="false">Tickets</button>
+          <button type="button" data-filter="cosplay" aria-pressed="false">Cosplay</button>
+          <button type="button" data-filter="exhibitors" aria-pressed="false">Exhibitors</button>
+        </div>
+        <div class="grid-4" id="news-list">
+          <a class="card" href="news-article.html" data-cat="announcement"><img src="assets/img/news-save-the-date.jpg" alt="" loading="lazy" style="aspect-ratio:4/5"><div class="card__body"><div class="card__meta"><span class="pill">Announcement</span></div><h3>OPF 2027 is isekai-bound! Save the date</h3><p>Oct 22, 2026</p></div></a>
+          <a class="card" href="join-us.html" data-cat="exhibitors"><img src="assets/img/news-booths-open.jpg" alt="" loading="lazy" style="aspect-ratio:4/5"><div class="card__body"><div class="card__meta"><span class="pill" style="--k: var(--pink-dark)">Exhibitors</span></div><h3>Booth applications are open</h3><p>Oct 22, 2026</p></div></a>
+          <a class="card" href="news-article.html" data-cat="announcement"><img src="assets/img/news-o-trio.jpg" alt="" loading="lazy" style="aspect-ratio:4/5"><div class="card__body"><div class="card__meta"><span class="pill">Announcement</span></div><h3>Meet the O-Trio: Otori, Popi and Fumi</h3><p>Oct 15, 2026</p></div></a>
+          <a class="card" href="news-article.html" data-cat="announcement"><img src="assets/img/news-luminous-blue.jpg" alt="" loading="lazy" style="aspect-ratio:4/5"><div class="card__body"><div class="card__meta"><span class="pill">Announcement</span></div><h3>Into the Luminous Blue: first look at the merch</h3><p>Oct 8, 2026</p></div></a>
+          <a class="card" href="news-article.html" data-cat="lineup"><div class="ph ph--portrait">Lineup visual</div><div class="card__body"><div class="card__meta"><span class="pill" style="--k: var(--cyan); --kc: var(--ink)">Lineup</span></div><h3>First Music Live headliner revealed</h3><p>Sample post</p></div></a>
+          <a class="card" href="news-article.html" data-cat="tickets"><div class="ph ph--portrait">Ticket visual</div><div class="card__body"><div class="card__meta"><span class="pill" style="--k: var(--yellow); --kc: var(--blue)">Tickets</span></div><h3>Early-bird passes on sale February 1</h3><p>Sample post</p></div></a>
+          <a class="card" href="news-article.html" data-cat="cosplay"><div class="ph ph--portrait">Cosplay visual</div><div class="card__body"><div class="card__meta"><span class="pill" style="--k: var(--pink)">Cosplay</span></div><h3>Cosplay Cup 2027: entries open</h3><p>Sample post</p></div></a>
+          <a class="card" href="news-article.html" data-cat="lineup"><div class="ph ph--portrait">IP visual</div><div class="card__body"><div class="card__meta"><span class="pill" style="--k: var(--cyan); --kc: var(--ink)">Lineup</span></div><h3>First 5 IP booths confirmed</h3><p>Sample post</p></div></a>
+        </div>
+        <p class="empty-note" hidden>No posts in this category yet.</p>
+        <nav class="more-row" aria-label="Pagination" style="gap:8px">
+          <a class="btn btn--blue btn--small" href="news.html" aria-current="page">1</a>
+          <a class="btn btn--small" style="box-shadow:inset 0 0 0 2px var(--blue);color:var(--blue)" href="#" data-soon="Page 2 of news">2</a>
+          <a class="btn btn--small" style="box-shadow:inset 0 0 0 2px var(--blue);color:var(--blue)" href="#" data-soon="Page 2 of news">Next →</a>
+        </nav>
+      </div>
+    </section>

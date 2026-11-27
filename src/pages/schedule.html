@@ -1,0 +1,44 @@
+<!--meta {"title": "Schedule & Map", "nav": "event", "desc": "Otaku Pop Fes 2027 timetable for both days by venue, and floor maps of every hall."} -->
+{{hero}}{"title": "Schedule", "ghost": "&amp; Map", "crumbs": ["Event"], "eyebrow": "Real text, not images — searchable and always up to date", "lead": "Both days, all three venues. Filter by venue, then check the floor maps.", "img": "kv-crowd.jpg", "chibi": "chibi-popi.webp", "actions": "<a class=\"btn btn--pink\" href=\"#timetable\">Timetable</a><a class=\"btn btn--ghost\" href=\"#map\">Floor maps</a>"}{{/hero}}
+
+    <section class="section" id="timetable" aria-labelledby="tt-title">
+      {{title tt-title Timetable}}
+      <div class="frame">
+        <svg class="sparkle sparkle--yellow" style="left:4%;top:24px" aria-hidden="true"><use href="#i-sparkle"/></svg>
+        <svg class="sparkle sparkle--pink" style="right:6%;top:40px;width:24px;height:24px" aria-hidden="true"><use href="#i-sparkle"/></svg>
+        <div class="container">
+          <div class="tabs tabs--big" role="tablist" aria-label="Day">
+            <button type="button" role="tab" id="t-day1" aria-controls="day1" aria-selected="true">Day 1<small>Sat · June 5</small></button>
+            <button type="button" role="tab" id="t-day2" aria-controls="day2" aria-selected="false" tabindex="-1">Day 2<small>Sun · June 6</small></button>
+          </div>
+          <div class="filters" data-venue-filter role="group" aria-label="Filter by venue">
+            <span class="filters__label">Venue</span>
+            <button type="button" data-venue="all" aria-pressed="true">All</button>
+            <button type="button" data-venue="discover" aria-pressed="false">Crystal Pavilion</button>
+            <button type="button" data-venue="connect" aria-pressed="false">Grand Ballroom</button>
+            <button type="button" data-venue="celebrate" aria-pressed="false">Cove Manila</button>
+          </div>
+          <div id="day1" role="tabpanel" aria-labelledby="t-day1">
+            {{demo-tt:1}}
+          </div>
+          <div id="day2" role="tabpanel" aria-labelledby="t-day2" hidden>
+            {{demo-tt:2}}
+          </div>
+          <p class="tt-note">*COVE Music Live ticket access applies. Timing is subject to final operations. <span data-phase-only="event"><strong>Event week:</strong> the pink "NOW" line shows what's on.</span></p>
+        </div>
+      </div>
+    </section>
+
+{{demo:index#map}}
+
+    <section class="section" id="downloads" aria-labelledby="dl-title">
+      <div class="container">
+        <div class="cta-box">
+          <div>
+            <p class="cta-box__title" id="dl-title">Save it for the day</p>
+            <p class="cta-box__sub">Printable PDF of the floor maps and both days' schedule.</p>
+          </div>
+          <a class="btn btn--white" href="#" data-soon="The printable PDF (published a week before the event)">Download PDF</a>
+        </div>
+      </div>
+    </section>

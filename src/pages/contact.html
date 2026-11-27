@@ -1,0 +1,36 @@
+<!--meta {"title": "Contact", "nav": "contact", "desc": "Contact the Otaku Pop Fes 2027 team about tickets, exhibiting, sponsorship or media."} -->
+{{hero}}{"title": "Contact", "eyebrow": "We reply within 1 business day", "lead": "Choose a topic so your message reaches the right desk.", "img": "kv-crowd.jpg", "chibi": "chibi-popi.webp"}{{/hero}}
+
+    <section class="section" style="padding-top:56px">
+      <div class="container">
+        <div class="desks">
+          <div class="desk"><h3>General &amp; tickets</h3><a href="mailto:hello@otakupopfes.com">hello@otakupopfes.com</a><p>Placeholder address</p></div>
+          <div class="desk"><h3>Exhibitors</h3><a href="mailto:exhibit@otakupopfes.com">exhibit@otakupopfes.com</a><p>Booths, artist alley, food</p></div>
+          <div class="desk"><h3>Sponsors &amp; media</h3><a href="mailto:partners@otakupopfes.com">partners@otakupopfes.com</a><p>Partnerships, press passes</p></div>
+        </div>
+        <div class="form-card">
+          <form data-demo-form novalidate>
+            <fieldset style="border:0;padding:0;margin:0 0 18px">
+              <legend class="field" style="padding:0"><label style="margin-bottom:8px">Topic *</label></legend>
+              <div class="radio-cards">
+                <label><input type="radio" name="topic" value="general" checked><span>General</span></label>
+                <label><input type="radio" name="topic" value="tickets"><span>Tickets</span></label>
+                <label><input type="radio" name="topic" value="exhibitor"><span>Exhibitor</span></label>
+                <label><input type="radio" name="topic" value="sponsor"><span>Sponsor</span></label>
+                <label><input type="radio" name="topic" value="media"><span>Media</span></label>
+              </div>
+            </fieldset>
+            <div class="fgrid">
+              <div class="field"><label for="c-name">Name *</label><input id="c-name" required autocomplete="name"><p class="field__err">Please enter your name.</p></div>
+              <div class="field"><label for="c-email">Email *</label><input id="c-email" type="email" required autocomplete="email"><p class="field__err">Please enter a valid email.</p></div>
+              <div class="field full"><label for="c-order">Order number <small style="font-weight:500;color:var(--muted)">(tickets only)</small></label><input id="c-order"></div>
+              <div class="field full"><label for="c-msg">Message *</label><textarea id="c-msg" required></textarea><p class="field__err">Please write a message.</p></div>
+              <label class="check full"><input type="checkbox" required> <span>I agree to the <a href="legal.html#privacy">Privacy Policy</a>. *</span></label>
+            </div>
+            <div class="more-row" style="justify-content:flex-start"><button class="btn btn--pink" type="submit">Send message</button></div>
+          </form>
+          <div class="form-done" hidden tabindex="-1"><h3>Message sent!</h3><p>We'll reply within 1 business day.<br><small>(Sample site — nothing was sent.)</small></p></div>
+        </div>
+        <p class="center" style="margin-top:28px">Quick answers are often in the <a href="faq.html" style="color:var(--blue);font-weight:800">FAQ</a>.</p>
+      </div>
+    </section>
