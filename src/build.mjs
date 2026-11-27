@@ -66,7 +66,7 @@ const NAV = [
   { key: 'tickets', label: 'Tickets', href: 'tickets.html' },
   { key: 'news', label: 'News', href: 'news.html' },
   { key: 'visit', label: 'Visit', sub: [['access.html', 'Access &amp; Venue'], ['faq.html', 'FAQ &amp; House Rules']] },
-  { key: 'join', label: 'Join Us', href: 'join-us.html', badge: 'New' },
+  { key: 'join', label: 'Join Us', href: 'join-us.html' },
   { key: 'sponsors', label: 'Sponsors', href: 'sponsors.html' },
 ];
 
