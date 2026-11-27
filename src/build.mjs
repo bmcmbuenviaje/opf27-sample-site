@@ -120,7 +120,7 @@ function header(file, navKey) {
     <div class="mobile-menu" id="mobile-menu" hidden>
       <ul>
         ${mob}
-        <li class="mobile-menu__group">More</li><li><a href="contact.html"${cur('contact.html')}>Contact</a></li><li><a href="archive.html"${cur('archive.html')}>Past Events</a></li>
+        <li class="mobile-menu__group">More</li><li><a href="orders.html"${cur('orders.html')}>My orders</a></li><li><a href="contact.html"${cur('contact.html')}>Contact</a></li><li><a href="archive.html"${cur('archive.html')}>Past Events</a></li>
       </ul>
       ${lang('')}
       <ul class="social" aria-label="Official social media">${social}
@@ -148,7 +148,7 @@ const footer = `
           <p><strong>June 5–6, 2027 · 10:00–22:00</strong><br>Okada Manila — Crystal Pavilion, Grand Ballroom &amp; Cove Manila</p>
           <p>Brought from Japan by CyberE Inc. · Organized by Mineski Global</p>
         </div>
-        <div><h2>Event</h2><ul><li><a href="exhibition.html">Exhibition</a></li><li><a href="cosplay-cup.html">Cosplay Cup</a></li><li><a href="music-live.html">Music Live</a></li><li><a href="schedule.html">Schedule &amp; Map</a></li><li><a href="tickets.html">Tickets</a></li><li><a href="merch.html">Merch</a></li></ul></div>
+        <div><h2>Event</h2><ul><li><a href="exhibition.html">Exhibition</a></li><li><a href="cosplay-cup.html">Cosplay Cup</a></li><li><a href="music-live.html">Music Live</a></li><li><a href="schedule.html">Schedule &amp; Map</a></li><li><a href="tickets.html">Tickets</a></li><li><a href="merch.html">Merch</a></li><li><a href="orders.html">My orders</a></li></ul></div>
         <div><h2>Visit</h2><ul><li><a href="access.html">Access &amp; Venue</a></li><li><a href="faq.html">FAQ &amp; House Rules</a></li><li><a href="news.html">News</a></li><li><a href="archive.html">Past Events</a></li></ul></div>
         <div><h2>Work with us</h2><ul><li><a href="join-us.html">Join Us (Exhibitors)</a></li><li><a href="sponsors.html">Sponsors &amp; Partners</a></li><li><a href="contact.html">Contact</a></li></ul></div>
         <div>

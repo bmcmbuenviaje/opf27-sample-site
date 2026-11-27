@@ -38,8 +38,20 @@
   const track = (e, p) => window.opfTrack && window.opfTrack(e, p || {});
   const toast = (m) => window.opfToast && window.opfToast(m);
 
+  /* orders + signed-in visitor (sample: kept in this browser; real build: server, by email) */
+  const ORDERS_KEY = 'opf-merch-orders';
+  function readOrders() { try { return JSON.parse(localStorage.getItem(ORDERS_KEY) || sessionStorage.getItem(ORDERS_KEY)) || []; } catch (e) { return []; } }
+  function writeOrders(list) {
+    try {
+      sessionStorage.setItem(ORDERS_KEY, JSON.stringify(list));
+      const c = window.opfConsent && window.opfConsent.get();
+      if (c && c.preferences) localStorage.setItem(ORDERS_KEY, JSON.stringify(list)); else localStorage.removeItem(ORDERS_KEY);
+    } catch (e) { /* ignore */ }
+  }
+  function saveOrder(o) { const l = readOrders(); l.unshift(o); writeOrders(l); }
+  function currentUser() { try { return JSON.parse(sessionStorage.getItem('opf-user')); } catch (e) { return null; } }
   // shared with the shelf-tag page
-  window.opfMerch = { PRODUCTS, SHELVES, art: (p) => art(p), peso: (n) => '₱' + n.toLocaleString('en-PH') };
+  window.opfMerch = { PRODUCTS, SHELVES, art: (p) => art(p), peso: (n) => '₱' + n.toLocaleString('en-PH'), readOrders, writeOrders, currentUser, CART_KEY: 'opf-merch-cart' };
   window.opfQr = qrSvg;
   if (!app) return;
 
@@ -157,6 +169,9 @@
       : (m === 'event' ? 'Pay at the counter when your number is called.' : `Reservations are held until <b>${RULES.reserveCutoff}</b>. Unclaimed items are released for sale after that. Pay at the counter.`);
     $('.mcheck__submit', checkout).textContent = pay === 'slash' ? 'Continue to Slash payment' : (m === 'event' ? 'Get my reference number' : 'Reserve my items');
     $('.mcheck__fields', checkout).hidden = m === 'event' && pay !== 'slash';
+    const user = currentUser();
+    if (user) { if (!$('#mc-email').value) $('#mc-email').value = user.email; if (!$('#mc-name').value && user.name) $('#mc-name').value = user.name; }
+    $('.mcheck__signin', checkout).hidden = !!user || (m === 'event' && pay !== 'slash');
     $('#mc-name').focus();
   }
   checkout.addEventListener('submit', (e) => {
@@ -209,6 +224,8 @@
     const total = cartTotal();
     track('merch_order_placed', { mode: m, paid, total, items: cartCount() });
     try { sessionStorage.setItem('opf-merch-ordered', '1'); } catch (e) { /* ignore */ }
+    saveOrder({ ref, paid, mode: m, bin: bin[0], counter, total, ts: Date.now(), email: ($('#mc-email') || {}).value || '',
+      items: cart.map((l) => ({ sku: l.sku, name: bySku[l.sku].name, size: l.size, qty: l.qty, price: bySku[l.sku].price })) });
     cart = []; saveCart(); closeCart();
     checkout.hidden = true; $('.mcart__view--bag', drawer).hidden = false;
 
@@ -227,7 +244,7 @@
         ? 'Keep this screen open. When it says <b>Ready</b>, go to your counter, show the number, collect your bag' + (paid ? '.' : ' and pay.')
         : paid ? `Pick up any time on June 5–6. Held until <b>${RULES.paidHoldUntil}</b>. Not collected? We'll email you on <b>${RULES.deliveryEmail}</b> to arrange delivery — shipping fee applies.`
           : `Held until <b>${RULES.reserveCutoff}</b> on Day 1, then released for sale. Pay at ${RULES.preorderCounter}.`}</p>
-      <p class="mpass__note">Sample only — ${paid ? 'no payment was taken' : 'nothing was reserved'}. A copy is emailed in the real build.</p>`;
+      <p class="mpass__note">Sample only — ${paid ? 'no payment was taken' : 'nothing was reserved'}. A copy is emailed in the real build. <a href="orders.html">See it in My orders</a></p>`;
     pass.hidden = false;
     requestAnimationFrame(() => pass.classList.add('is-open'));
     $('.mpass__close', pass).focus();

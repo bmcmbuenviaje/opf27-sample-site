@@ -8,7 +8,7 @@
   'use strict';
   const root = document.documentElement;
   const page = location.pathname.split('/').pop() || 'index.html';
-  if (/^merch|^lp-merch/.test(page)) return;
+  if (/^merch|^lp-merch|^orders/.test(page)) return;
 
   const ss = { get: (k) => { try { return sessionStorage.getItem(k); } catch (e) { return null; } }, set: (k, v) => { try { sessionStorage.setItem(k, v); } catch (e) { /* ignore */ } } };
   const KEY = 'opf-merch-nudge';

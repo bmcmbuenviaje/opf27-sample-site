@@ -1,5 +1,5 @@
 <!--meta {"title": "Merch", "nav": "merch", "css": ["merch.css"], "js": ["merch.js"], "ext": ["https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"], "desc": "Official Otaku Pop Fes 2027 merch — pre-order online and pick up at the event, or scan to order at the Merch Hub."} -->
-{{hero}}{"title": "Official", "ghost": "Merch", "eyebrow": "Pre-order · Pick up at the event · Scan to order on site", "lead": "Pre-order your OPF 2027 merch and skip the line at the Merch Hub — or scan any sample on the shelf to order on the day.", "img": "news-luminous-blue.jpg", "mascot": {"src": "mascot-otori.webp", "alt": "Otori holding her festival passport"}, "actions": "<a class=\"btn btn--pink\" href=\"#shop\">Shop the collection</a><a class=\"btn btn--ghost\" href=\"#how\">How pre-order works</a>"}{{/hero}}
+{{hero}}{"title": "Official", "ghost": "Merch", "eyebrow": "Pre-order · Pick up at the event · Scan to order on site", "lead": "Pre-order your OPF 2027 merch and skip the line at the Merch Hub — or scan any sample on the shelf to order on the day.", "img": "news-luminous-blue.jpg", "mascot": {"src": "mascot-otori.webp", "alt": "Otori holding her festival passport"}, "actions": "<a class=\"btn btn--pink\" href=\"#shop\">Shop the collection</a><a class=\"btn btn--ghost\" href=\"#how\">How pre-order works</a><a class=\"btn btn--ghost\" href=\"orders.html\">My orders</a>"}{{/hero}}
 
     <div data-merch>
       <!-- phase banners -->
@@ -84,6 +84,7 @@
         <form class="mcheck" novalidate hidden>
           <button type="button" class="mcheck__back" data-back-to-bag>← Back to bag</button>
           <p class="mcheck__summary"></p>
+          <p class="mcheck__signin">Have an account? <a href="orders.html?next=merch">Sign in</a> to fill this in and keep your orders in one place — or just continue as a guest.</p>
           <div class="mcheck__fields">
             <div class="field"><label for="mc-name">Full name *</label><input id="mc-name" required autocomplete="name" data-private><p class="field__err">Please enter your name.</p></div>
             <div class="field"><label for="mc-email">Email *</label><input id="mc-email" type="email" required autocomplete="email" data-private><p class="field__err">Please enter a valid email.</p></div>
