@@ -373,3 +373,127 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 14px 28px color-mix(in
   .venue3d { aspect-ratio: 4 / 5; }
   .venue3d__play { white-space: normal; width: max-content; max-width: 86%; text-align: center; }
 }
+
+/* ==========================================================================
+   Interactive venue map (Crystal Pavilion) — mobile first
+   ========================================================================== */
+.imap { position: relative; z-index: 1; display: grid; gap: 16px; }
+.imap__stage {
+  position: relative; overflow: hidden; touch-action: pan-y; user-select: none; -webkit-user-select: none;
+  background: #fff; border-radius: 12px; padding: 6px; box-shadow: 0 10px 30px color-mix(in srgb, var(--night) 25%, transparent);
+}
+.imap-svg { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; border-radius: 8px; cursor: grab; }
+.imap.is-zoomed .imap-svg { cursor: grab; }
+.imap-svg:active { cursor: grabbing; }
+.imap-svg text { font-family: var(--font-body); font-weight: 900; pointer-events: none; }
+.imap-bg { fill: color-mix(in srgb, var(--yellow) 14%, #FBF6E9); }
+.imap-svg { color: var(--ink); }
+.imap-mall { fill: color-mix(in srgb, var(--pink) 12%, #F5EEF2); stroke: #fff; stroke-width: 4; }
+.imap-muted { font-size: 17px; fill: var(--muted); letter-spacing: .05em; }
+.imap-water { fill: color-mix(in srgb, var(--cyan) 30%, #DCEBF7); }
+.imap-water__t { font-family: Georgia, serif !important; font-weight: 700 !important; font-size: 30px; letter-spacing: .14em; fill: color-mix(in srgb, var(--night) 70%, transparent); }
+.imap-ring { fill: #fff; stroke: var(--ink); stroke-width: 3; }
+
+.imap-zone { cursor: pointer; outline: none; }
+.imap-zone__shape { fill: var(--zk); stroke: #fff; stroke-width: 4; transition: opacity .2s ease, filter .2s ease; }
+.imap-zone__label { fill: #fff; letter-spacing: .04em; font-family: var(--font-display) !important; font-stretch: 125%; }
+.imap-zone__label.is-ink { fill: var(--ink); }
+.imap-zone:hover .imap-zone__shape { filter: brightness(1.08) saturate(1.1); }
+.imap-zone:focus-visible .imap-zone__shape { stroke: var(--yellow); stroke-width: 8; }
+.imap-zone.is-active .imap-zone__shape { stroke: var(--yellow); stroke-width: 9; }
+.has-selection .imap-zone:not(.is-active) .imap-zone__shape { opacity: .35; }
+.has-selection .imap-pin:not(.is-active) { opacity: .35; }
+.imap-zone--sign .imap-zone__shape { stroke: var(--ink); stroke-width: 3; }
+
+/* IP booths: invisible until zoomed in */
+.imap-booth path { fill: transparent; stroke: transparent; stroke-width: 2; transition: fill .2s ease; }
+.imap-booth .imap-fine { font-size: 12px; dominant-baseline: middle; fill: #fff; text-anchor: middle; opacity: 0; transition: opacity .2s ease; }
+.imap.is-fine .imap-booth path { fill: color-mix(in srgb, #fff 16%, transparent); stroke: color-mix(in srgb, #fff 70%, transparent); }
+.imap.is-fine .imap-booth[data-layout="A"] path { fill: var(--pink); }
+.imap.is-fine .imap-booth[data-layout="B"] path { fill: var(--yellow); }
+.imap-booth[data-layout="B"] .imap-fine, .imap-booth[data-layout="C"] .imap-fine { fill: var(--ink); }
+.imap.is-fine .imap-booth[data-layout="C"] path { fill: var(--cyan); }
+.imap.is-fine .imap-booth .imap-fine { opacity: 1; }
+.imap.is-fine .imap-zone--ip .imap-zone__label { opacity: .25; }
+.imap-booth.is-active path { fill: #fff !important; stroke: var(--ink); stroke-width: 4; }
+.imap-booth.is-active .imap-fine { fill: var(--ink); opacity: 1; }
+
+.imap-pin circle { stroke: #fff; stroke-width: 4; }
+.imap-pin text { font-size: 18px; fill: #fff; text-anchor: middle; }
+.imap-pin text.is-ink { fill: var(--ink); }
+.imap-pin { pointer-events: none; transition: opacity .2s ease; }
+.imap-pin.is-active circle { stroke: var(--ink); }
+.imap-tag { font-size: 15px; fill: var(--blue); letter-spacing: .06em; }
+.imap-route { fill: none; stroke: var(--blue); stroke-width: 5; stroke-dasharray: 12 9; stroke-linecap: round; }
+.imap-fac rect { fill: var(--ink); }
+.imap-fac text { font-size: 14px; fill: #fff; }
+.imap-fac--p rect { fill: var(--blue); }
+.imap-fac--p text { font-size: 20px; }
+
+.imap__controls { position: absolute; right: 14px; top: 14px; display: grid; gap: 6px; }
+.imap__controls button {
+  width: 44px; height: 44px; border-radius: 10px; border: 2px solid var(--ink); background: #fff; color: var(--ink);
+  font-size: 22px; font-weight: 900; line-height: 1; cursor: pointer; box-shadow: 0 4px 10px rgba(0, 0, 0, .15);
+}
+.imap__controls button:hover { background: var(--yellow); }
+.imap__hint {
+  position: absolute; left: 14px; bottom: 12px; margin: 0; padding: 6px 10px; border-radius: 999px;
+  background: color-mix(in srgb, var(--ink) 85%, transparent); color: #fff; font-size: 11.5px; font-weight: 700; pointer-events: none;
+  transition: opacity .3s ease;
+}
+.imap.has-selection .imap__hint, .imap.is-zoomed .imap__hint { opacity: 0; }
+.only-mouse { display: none; }
+@media (hover: hover) and (pointer: fine) { .only-touch { display: none; } .only-mouse { display: inline; } }
+
+.imap__side { display: grid; gap: 14px; align-content: start; }
+.imap__info {
+  background: #fff; color: var(--ink); border: 3px solid var(--ink); border-radius: 12px; padding: 16px 18px;
+  min-height: 150px;
+}
+.imap__kicker { margin: 0 0 4px; font-size: 11px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; color: var(--pink-dark); }
+.imap__title { margin: 0 0 6px; font-size: 19px; font-weight: 900; line-height: 1.2; }
+.imap__text { margin: 0; font-size: 14px; line-height: 1.5; }
+.imap__links { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 0; }
+.imap__links:empty { display: none; }
+.imap__links a {
+  display: inline-flex; align-items: center; padding: 8px 14px; border-radius: 999px; background: var(--blue); color: #fff;
+  font-size: 12px; font-weight: 900; text-transform: uppercase; text-decoration: none;
+}
+.imap__links a:hover { background: var(--pink-dark); }
+.imap__legend { display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px; }
+.imap__legend li { padding: 0; }
+.imap__legend li + li { border-top: 0; }
+.imap__legend button {
+  display: flex; align-items: center; gap: 10px; width: 100%; min-height: 44px; padding: 6px 4px;
+  background: none; border: 0; border-bottom: 1.5px solid var(--line); text-align: left; cursor: pointer;
+  font-size: 13px; font-weight: 800; line-height: 1.2; color: var(--ink);
+}
+.imap__legend button:hover { background: var(--mist); }
+.imap__legend button[aria-pressed="true"] { background: color-mix(in srgb, var(--yellow) 55%, white); }
+
+/* lineup list → buttons that find the booth */
+.ip-grid li:has(.ip-pick) { padding: 0; }
+.ip-pick {
+  display: flex; align-items: center; gap: 10px; width: 100%; height: 100%; min-height: 44px; padding: 8px 10px;
+  background: none; border: 0; border-radius: 7px; color: inherit; font: inherit; text-align: left; cursor: pointer;
+}
+.ip-pick:hover, .ip-pick[aria-pressed="true"] { background: rgba(255, 255, 255, .18); }
+.ip-pick[aria-pressed="true"] { box-shadow: inset 0 0 0 2px var(--yellow); }
+
+@media (min-width: 900px) {
+  .imap { grid-template-columns: minmax(0, 1fr) 320px; gap: 24px; align-items: start; }
+  .imap-svg { aspect-ratio: 1600 / 835; }
+  .imap__legend { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .imap__legend { grid-template-columns: 1fr; }
+  .imap__controls { right: 10px; top: 10px; }
+  .imap__controls button { width: 40px; height: 40px; }
+}
+@media (max-width: 899px) {
+  .imap__stage { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+  .imap-svg { flex: 1 1 100%; }
+  .imap__controls { position: static; display: flex; order: 3; margin-left: auto; }
+  .imap__hint { position: static; order: 2; background: none; color: var(--muted); padding: 0 4px; font-size: 12px; }
+  .imap.has-selection .imap__hint, .imap.is-zoomed .imap__hint { opacity: 1; }
+}

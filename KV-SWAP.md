@@ -19,6 +19,8 @@ Edit `assets/css/tokens.css`. Every colour on every page comes from these values
 
 New font? Add its Google Fonts link (or `@font-face` for a licensed font) in `src/build.mjs`, in the `<head>` part of `page()`.
 
+The interactive Crystal Pavilion map (Schedule & Map) is drawn in code (`src/cp-map.mjs`) and uses the same tokens, so it recolours too.
+
 **Preview without editing:** open any page → **Sample controls** (bottom left) → palette swatches. They swap these same tokens live.
 
 ## 2. Images — same file names

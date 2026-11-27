@@ -7,6 +7,7 @@
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { cpMapBlock } from './cp-map.mjs';
 
 const SRC = dirname(fileURLToPath(import.meta.url));
 const OUT = join(SRC, '..');
@@ -28,7 +29,22 @@ function demoPart(page, id) {
   const re = new RegExp(`<section class="section" id="${id}"[\\s\\S]*?\\n    </section>`);
   const m = html.match(re);
   if (!m) throw new Error(`demo section not found: ${page}#${id}`);
-  return m[0];
+  return id === 'map' ? upgradeMap(m[0]) : m[0];
+}
+
+// Crystal Pavilion: swap the flat JPG + static legend for the interactive vector map
+function upgradeMap(html) {
+  const before = html;
+  html = html.replace(/<div class="map-layout">\s*<div class="map-card">\s*<a href="assets\/img\/map-crystal-pavilion\.jpg"[\s\S]*?<\/ol>\s*<\/div>\s*<\/div>/, () => cpMapBlock());
+  if (html === before) throw new Error('Crystal Pavilion map block not found in demo');
+  html = html.replace(/<li( class="is-tba")?><b style="([^"]*)">([A-C]\d\d)<\/b>([^<]*)<\/li>/g,
+    '<li$1><button type="button" class="ip-pick" data-booth="$3" aria-label="Show booth $3 on the map"><b style="$2">$3</b>$4</button></li>');
+  html = html.replace('<h4>IP booth lineup <span>— 20 titles across three booth layouts</span></h4>', '<h4>IP booth lineup <span>— tap a title to find its booth on the map</span></h4>');
+  // anchors so other pages / the map can open a specific hall
+  html = html.replace('<details class="acc" open>', '<details class="acc" id="map-cp" open>');
+  html = html.replace(/<details class="acc">(\s*<summary class="acc__head"><span class="container"><span class="acc__title">Grand Ballroom)/, '<details class="acc" id="map-gb">$1');
+  html = html.replace(/<details class="acc">(\s*<summary class="acc__head"><span class="container"><span class="acc__title">Cove Manila)/, '<details class="acc" id="map-cove">$1');
+  return html;
 }
 
 // links in the demo that pointed to "not in this demo yet" now go to real pages
@@ -192,7 +208,8 @@ function page(file, meta, body) {
   <link rel="stylesheet" href="assets/css/pages.css?v=${V}">
   <script>try{var p=localStorage.getItem('opf-phase');if(p)document.documentElement.dataset.phase=p}catch(e){}</script>
   <script src="assets/js/main.js?v=${V}" defer></script>
-  <script src="assets/js/site.js?v=${V}" defer></script>${js}
+  <script src="assets/js/site.js?v=${V}" defer></script>
+  <script src="assets/js/map.js?v=${V}" defer></script>${js}
 </head>
 <body>
   ${sprite}

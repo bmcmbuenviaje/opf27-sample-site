@@ -12,12 +12,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,800..900&amp;family=Montserrat:wght@400;500;600;700;800;900&amp;display=swap">
-  <link rel="stylesheet" href="assets/css/tokens.css?v=mwyv7c3y">
-  <link rel="stylesheet" href="assets/css/styles.css?v=mwyv7c3y">
-  <link rel="stylesheet" href="assets/css/pages.css?v=mwyv7c3y">
+  <link rel="stylesheet" href="assets/css/tokens.css?v=mwyvoq43">
+  <link rel="stylesheet" href="assets/css/styles.css?v=mwyvoq43">
+  <link rel="stylesheet" href="assets/css/pages.css?v=mwyvoq43">
   <script>try{var p=localStorage.getItem('opf-phase');if(p)document.documentElement.dataset.phase=p}catch(e){}</script>
-  <script src="assets/js/main.js?v=mwyv7c3y" defer></script>
-  <script src="assets/js/site.js?v=mwyv7c3y" defer></script>
+  <script src="assets/js/main.js?v=mwyvoq43" defer></script>
+  <script src="assets/js/site.js?v=mwyvoq43" defer></script>
+  <script src="assets/js/map.js?v=mwyvoq43" defer></script>
 </head>
 <body>
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -229,51 +230,204 @@
         <h2 class="sec-title__text display" id="map-title"><span class="sec-title__ghost" aria-hidden="true">Map</span><span>Map</span><span class="sec-title__ghost" aria-hidden="true">Map</span></h2>
       </div>
 
-      <details class="acc" open>
+      <details class="acc" id="map-cp" open>
         <summary class="acc__head"><span class="container"><span class="acc__title">Crystal Pavilion Floor Map</span><span class="acc__chev"><svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></span></span></summary>
         <div class="acc__panel frame">
           <svg class="sparkle sparkle--yellow" style="right:24%;top:30px" aria-hidden="true"><use href="#i-sparkle"/></svg>
           <svg class="sparkle sparkle--pink" style="right:4%;bottom:38%;width:22px;height:22px" aria-hidden="true"><use href="#i-sparkle"/></svg>
           <div class="container">
-            <div class="map-layout">
-              <div class="map-card">
-                <a href="assets/img/map-crystal-pavilion.jpg" target="_blank" rel="noopener">
-                  <img src="assets/img/map-crystal-pavilion.jpg" alt="Crystal Pavilion floor map: the curved concourse around The Fountain holds, from left to right, the Sponsors Area, IP Booths, Stage and Food Area. Main entrance and ticketing is at Event Arc 1 by the Fountain Foyer; re-entry and exit is at Event Arc 2." loading="lazy" width="1600" height="835">
-                  <span class="map-card__zoom"><svg class="icon" aria-hidden="true"><use href="#i-expand"/></svg>Full size</span>
-                </a>
+            
+            <div class="imap" data-imap>
+              <div class="imap__stage">
+                
+  <svg class="imap-svg" viewBox="0 0 1600 835" preserveAspectRatio="xMidYMid meet" role="group" aria-labelledby="cp-t cp-d">
+    <title id="cp-t">Crystal Pavilion interactive floor map</title>
+    <desc id="cp-d">The event concourse curves around The Fountain. From left to right: Main Entrance at Event Arc 1, Sponsors Area, IP Experience Booths, Crystal Stage, Food Street, and Re-entry and Exit at Event Arc 2. The way to the Grand Ballroom leaves from the bottom right.</desc>
+    <defs>
+      <pattern id="cp-dots" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.6" fill="currentColor" opacity=".08"/></pattern>
+      <marker id="cp-arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="var(--blue)"/></marker>
+    </defs>
+    <rect x="-300" y="-300" width="2200" height="1435" class="imap-bg"/>
+    <rect x="-300" y="-300" width="2200" height="1435" fill="url(#cp-dots)"/>
+
+    <!-- mall around the fountain (not part of the event) -->
+    <path class="imap-mall" d="M93.9 471.8 A720 400 0 0 0 1526.1 471.8 L1327.2 456.1 A520 250 0 0 1 292.8 456.1Z"/>
+    <text class="imap-muted" x="810" y="790" text-anchor="middle">CRYSTAL CORRIDOR · THE PROMENADE (mall shops open as usual)</text>
+
+    <!-- fountain -->
+    <ellipse class="imap-water" cx="800" cy="420" rx="505" ry="245"/>
+    <text class="imap-water__t" x="800" y="430" text-anchor="middle">THE FOUNTAIN</text>
+
+    <!-- event concourse base + gaps -->
+    <path class="imap-ring" d="M1459.6 416 A650 400 0 0 0 160.4 416 L265.3 419.9 A545 290 0 0 1 1354.7 419.9Z"/>
+
+    
+      <g class="imap-zone" data-zone="sponsors" tabindex="0" role="button" aria-label="02 Sponsors Area" style="--zk:var(--pink)">
+        <path class="imap-zone__shape" d="M475.2 87.1 A650 400 0 0 0 179.3 333.2 L281.2 359.8 A545 290 0 0 1 529.3 181.4Z"/>
+        <path id="lbl-sponsors" d="M230.2 346.5 A597.5 345 0 0 1 502.3 134.3" fill="none"/>
+        <text class="imap-zone__label" font-size="34" dy="11.899999999999999"><textPath href="#lbl-sponsors" startOffset="50%" text-anchor="middle">SPONSORS AREA</textPath></text>
+      </g>
+    <g class="imap-zone imap-zone--ip" data-zone="ip" tabindex="0" role="button" aria-label="03 IP Experience Booths" style="--zk:var(--blue)">
+      <path class="imap-zone__shape" d="M1032.3 54.1 A650 400 0 0 0 514.9 73.6 L562.6 171.6 A545 290 0 0 1 996.4 157.5Z"/>
+      <path id="lbl-ip" d="M550.8 148.4 A571 316 0 0 1 1005.3 133.1" fill="none"/>
+      <text class="imap-zone__label" font-size="30" dy="10"><textPath href="#lbl-ip" startOffset="50%" text-anchor="middle">IP BOOTHS</textPath></text>
+      <g class="imap-booth" data-booth="A01" data-layout="A" data-title="Kagurabachi" tabindex="-1" role="button" aria-label="Booth A01: Kagurabachi">
+          <path d="M537.7 66.8 A650 400 0 0 0 516.1 73.2 L539.6 119.6 A598 348 0 0 1 559.5 114Z"/>
+          <text class="imap-fine" x="538.2" y="93.4" transform="rotate(64.2 538.2 93.4)">A01</text>
+        </g><g class="imap-booth" data-booth="A02" data-layout="A" data-title="Though I Am an Inept Villainess" tabindex="-1" role="button" aria-label="Booth A02: Though I Am an Inept Villainess">
+          <path d="M562.1 60.2 A650 400 0 0 0 540.1 66.1 L561.7 113.4 A598 348 0 0 1 581.9 108.3Z"/>
+          <text class="imap-fine" x="561.4" y="87" transform="rotate(66.5 561.4 87)">A02</text>
+        </g><g class="imap-booth" data-booth="A03" data-layout="A" data-title="Haikyu!!" tabindex="-1" role="button" aria-label="Booth A03: Haikyu!!">
+          <path d="M586.9 54.3 A650 400 0 0 0 564.6 59.6 L584.2 107.8 A598 348 0 0 1 604.8 103.1Z"/>
+          <text class="imap-fine" x="585.1" y="81.1" transform="rotate(68.9 585.1 81.1)">A03</text>
+        </g><g class="imap-booth" data-booth="A04" data-layout="A" data-title="One-Punch Man" tabindex="-1" role="button" aria-label="Booth A04: One-Punch Man">
+          <path d="M612.2 49 A650 400 0 0 0 589.5 53.7 L607.1 102.6 A598 348 0 0 1 628 98.5Z"/>
+          <text class="imap-fine" x="609.2" y="75.9" transform="rotate(71.2 609.2 75.9)">A04</text>
+        </g><g class="imap-booth" data-booth="A05" data-layout="A" data-title="Frieren: Beyond Journey's End" tabindex="-1" role="button" aria-label="Booth A05: Frieren: Beyond Journey's End">
+          <path d="M637.7 44.3 A650 400 0 0 0 614.8 48.5 L630.4 98.1 A598 348 0 0 1 651.5 94.4Z"/>
+          <text class="imap-fine" x="633.6" y="71.3" transform="rotate(73.6 633.6 71.3)">A05</text>
+        </g><g class="imap-booth" data-booth="B01" data-layout="B" data-title="DAN DA DAN" tabindex="-1" role="button" aria-label="Booth B01: DAN DA DAN">
+          <path d="M663.6 40.3 A650 400 0 0 0 640.3 43.9 L653.9 94.1 A598 348 0 0 1 675.3 90.9Z"/>
+          <text class="imap-fine" x="658.2" y="67.2" transform="rotate(75.9 658.2 67.2)">B01</text>
+        </g><g class="imap-booth" data-booth="B02" data-layout="B" data-title="The Apothecary Diaries" tabindex="-1" role="button" aria-label="Booth B02: The Apothecary Diaries">
+          <path d="M689.7 36.9 A650 400 0 0 0 666.2 39.9 L677.7 90.6 A598 348 0 0 1 699.3 88Z"/>
+          <text class="imap-fine" x="683.2" y="63.8" transform="rotate(78.3 683.2 63.8)">B02</text>
+        </g><g class="imap-booth" data-booth="B03" data-layout="B" data-title="Jujutsu Kaisen" tabindex="-1" role="button" aria-label="Booth B03: Jujutsu Kaisen">
+          <path d="M715.9 34.2 A650 400 0 0 0 692.3 36.6 L701.7 87.8 A598 348 0 0 1 723.5 85.7Z"/>
+          <text class="imap-fine" x="708.4" y="61" transform="rotate(80.6 708.4 61)">B03</text>
+        </g><g class="imap-booth" data-booth="B04" data-layout="B" data-title="Kaiju No. 8" tabindex="-1" role="button" aria-label="Booth B04: Kaiju No. 8">
+          <path d="M742.4 32.2 A650 400 0 0 0 718.6 34 L725.9 85.5 A598 348 0 0 1 747.8 83.9Z"/>
+          <text class="imap-fine" x="733.7" y="58.8" transform="rotate(83.0 733.7 58.8)">B04</text>
+        </g><g class="imap-booth" data-booth="B05" data-layout="B" data-title="Chainsaw Man" tabindex="-1" role="button" aria-label="Booth B05: Chainsaw Man">
+          <path d="M769 30.8 A650 400 0 0 0 745.1 32 L750.3 83.7 A598 348 0 0 1 772.2 82.7Z"/>
+          <text class="imap-fine" x="759.1" y="57.2" transform="rotate(85.3 759.1 57.2)">B05</text>
+        </g><g class="imap-booth" data-booth="B06" data-layout="B" data-title="Blue Lock" tabindex="-1" role="button" aria-label="Booth B06: Blue Lock">
+          <path d="M795.6 30.1 A650 400 0 0 0 771.7 30.7 L774.7 82.6 A598 348 0 0 1 796.7 82.1Z"/>
+          <text class="imap-fine" x="784.7" y="56.3" transform="rotate(87.7 784.7 56.3)">B06</text>
+        </g><g class="imap-booth" data-booth="B07" data-layout="B" data-title="Naruto" tabindex="-1" role="button" aria-label="Booth B07: Naruto">
+          <path d="M822.3 30.1 A650 400 0 0 0 798.3 30.1 L799.3 82.1 A598 348 0 0 1 821.3 82.1Z"/>
+          <text class="imap-fine" x="810.3" y="56" transform="rotate(-90.0 810.3 56)">B07</text>
+        </g><g class="imap-booth" data-booth="B08" data-layout="B" data-title="Demon Slayer" tabindex="-1" role="button" aria-label="Booth B08: Demon Slayer">
+          <path d="M848.9 30.7 A650 400 0 0 0 825 30.1 L823.8 82.1 A598 348 0 0 1 845.8 82.6Z"/>
+          <text class="imap-fine" x="835.9" y="56.3" transform="rotate(-87.6 835.9 56.3)">B08</text>
+        </g><g class="imap-booth" data-booth="B09" data-layout="B" data-title="The Dangers in My Heart" tabindex="-1" role="button" aria-label="Booth B09: The Dangers in My Heart">
+          <path d="M875.5 32 A650 400 0 0 0 851.6 30.8 L848.3 82.7 A598 348 0 0 1 870.2 83.8Z"/>
+          <text class="imap-fine" x="861.4" y="57.3" transform="rotate(-85.3 861.4 57.3)">B09</text>
+        </g><g class="imap-booth" data-booth="B10" data-layout="B" data-title="To be announced" tabindex="-1" role="button" aria-label="Booth B10: To be announced">
+          <path d="M901.9 34 A650 400 0 0 0 878.2 32.2 L872.7 83.9 A598 348 0 0 1 894.6 85.5Z"/>
+          <text class="imap-fine" x="886.9" y="58.8" transform="rotate(-82.9 886.9 58.8)">B10</text>
+        </g><g class="imap-booth" data-booth="C01" data-layout="C" data-title="To be announced" tabindex="-1" role="button" aria-label="Booth C01: To be announced">
+          <path d="M928.2 36.7 A650 400 0 0 0 904.6 34.3 L897 85.7 A598 348 0 0 1 918.8 87.8Z"/>
+          <text class="imap-fine" x="912.2" y="61" transform="rotate(-80.6 912.2 61)">C01</text>
+        </g><g class="imap-booth" data-booth="C02" data-layout="C" data-title="To be announced" tabindex="-1" role="button" aria-label="Booth C02: To be announced">
+          <path d="M954.3 40 A650 400 0 0 0 930.9 37 L921.2 88.1 A598 348 0 0 1 942.8 90.7Z"/>
+          <text class="imap-fine" x="937.3" y="63.9" transform="rotate(-78.2 937.3 63.9)">C02</text>
+        </g><g class="imap-booth" data-booth="C03" data-layout="C" data-title="To be announced" tabindex="-1" role="button" aria-label="Booth C03: To be announced">
+          <path d="M980.2 44 A650 400 0 0 0 957 40.4 L945.2 91 A598 348 0 0 1 966.6 94.1Z"/>
+          <text class="imap-fine" x="962.3" y="67.3" transform="rotate(-75.9 962.3 67.3)">C03</text>
+        </g><g class="imap-booth" data-booth="C04" data-layout="C" data-title="To be announced" tabindex="-1" role="button" aria-label="Booth C04: To be announced">
+          <path d="M1005.8 48.6 A650 400 0 0 0 982.8 44.4 L969 94.5 A598 348 0 0 1 990.1 98.2Z"/>
+          <text class="imap-fine" x="987" y="71.4" transform="rotate(-73.5 987 71.4)">C04</text>
+        </g><g class="imap-booth" data-booth="C05" data-layout="C" data-title="To be announced" tabindex="-1" role="button" aria-label="Booth C05: To be announced">
+          <path d="M1031 53.8 A650 400 0 0 0 1008.4 49.1 L992.5 98.6 A598 348 0 0 1 1013.4 102.7Z"/>
+          <text class="imap-fine" x="1011.4" y="76" transform="rotate(-71.2 1011.4 76)">C05</text>
+        </g>
+    </g>
+    
+      <g class="imap-zone" data-zone="stage" tabindex="0" role="button" aria-label="04 Crystal Stage" style="--zk:var(--night)">
+        <path class="imap-zone__shape" d="M1277.6 152.1 A650 400 0 0 0 1074.4 64.6 L1031.7 165.1 A545 290 0 0 1 1202 228.5Z"/>
+        <path id="lbl-stage" d="M1053 114.8 A597.5 345 0 0 1 1239.8 190.3" fill="none"/>
+        <text class="imap-zone__label" font-size="32" dy="11.2"><textPath href="#lbl-stage" startOffset="50%" text-anchor="middle">STAGE</textPath></text>
+      </g>
+    
+      <g class="imap-zone" data-zone="food" tabindex="0" role="button" aria-label="05 Food Street" style="--zk:var(--cyan)">
+        <path class="imap-zone__shape" d="M1440.7 333.2 A650 400 0 0 0 1307.9 172.9 L1227.5 243.6 A545 290 0 0 1 1338.8 359.8Z"/>
+        <path id="lbl-food" d="M1267.7 208.2 A597.5 345 0 0 1 1389.8 346.5" fill="none"/>
+        <text class="imap-zone__label is-ink" font-size="28" dy="9.799999999999999"><textPath href="#lbl-food" startOffset="50%" text-anchor="middle">FOOD STREET</textPath></text>
+      </g>
+    
+      <g class="imap-zone" data-zone="entrance" tabindex="0" role="button" aria-label="01 Main Entrance and Ticketing" style="--zk:var(--pink-dark)">
+        <path class="imap-zone__shape" d="M174.2 346.8 A650 400 0 0 0 161.6 402.1 L266.3 409.8 A545 290 0 0 1 276.9 369.7Z"/>
+        <path id="lbl-entrance" d="M214 405.9 A597.5 345 0 0 1 225.6 358.3" fill="none"/>
+        
+      </g>
+    
+      <g class="imap-zone" data-zone="exit" tabindex="0" role="button" aria-label="06 Re-entry and Exit" style="--zk:var(--ink)">
+        <path class="imap-zone__shape" d="M1458.4 402.1 A650 400 0 0 0 1445.8 346.8 L1343.1 369.7 A545 290 0 0 1 1353.7 409.8Z"/>
+        <path id="lbl-exit" d="M1394.4 358.3 A597.5 345 0 0 1 1406 405.9" fill="none"/>
+        
+      </g>
+
+    <!-- visitor route -->
+    <path class="imap-route" d="M60 520 C120 520 140 422 208.3 392" marker-end="url(#cp-arrow)"/>
+    <path class="imap-route" d="M1411.7 402 C1500 520 1480 640 1500 760" marker-end="url(#cp-arrow)"/>
+
+    <!-- facilities -->
+    <g class="imap-fac" transform="translate(40 470)"><rect width="150" height="34" rx="8"/><text x="75" y="23" text-anchor="middle">Fountain Foyer drop-off</text></g>
+    <g class="imap-fac imap-fac--p" transform="translate(200 470)"><rect width="34" height="34" rx="8"/><text x="17" y="24" text-anchor="middle">P</text></g>
+    <g class="imap-fac imap-fac--p" transform="translate(1480 430)"><rect width="34" height="34" rx="8"/><text x="17" y="24" text-anchor="middle">P</text></g>
+
+    <!-- Grand Ballroom pointer -->
+    <g class="imap-zone imap-zone--sign" data-zone="ballroom" tabindex="0" role="button" aria-label="07 Way to Grand Ballroom" style="--zk:var(--yellow)">
+      <rect class="imap-zone__shape" x="1380" y="770" width="210" height="52" rx="10"/>
+      <text class="imap-zone__label is-ink" x="1485" y="804" text-anchor="middle" font-size="19">TO GRAND BALLROOM →</text>
+    </g>
+
+    <!-- numbered pins -->
+    <g class="imap-pin" data-zone="entrance" aria-hidden="true" transform="translate(212.3 378)"><circle r="22" style="fill:var(--pink-dark)"/><text dy="7" class="">01</text></g>
+    <g class="imap-pin" data-zone="sponsors" aria-hidden="true" transform="translate(329.7 224.8)"><circle r="22" style="fill:var(--pink)"/><text dy="7" class="">02</text></g>
+    <g class="imap-pin" data-zone="ip" aria-hidden="true" transform="translate(586.2 110.1)"><circle r="22" style="fill:var(--blue)"/><text dy="7" class="">03</text></g>
+    <g class="imap-pin" data-zone="stage" aria-hidden="true" transform="translate(1152.7 147.4)"><circle r="22" style="fill:var(--night)"/><text dy="7" class="">04</text></g>
+    <g class="imap-pin" data-zone="food" aria-hidden="true" transform="translate(1342.4 273.4)"><circle r="22" style="fill:var(--cyan)"/><text dy="7" class="is-ink">05</text></g>
+    <g class="imap-pin" data-zone="exit" aria-hidden="true" transform="translate(1407.7 378)"><circle r="22" style="fill:var(--ink)"/><text dy="7" class="">06</text></g>
+    <g class="imap-pin" data-zone="ballroom" aria-hidden="true" transform="translate(1356 796)"><circle r="22" style="fill:var(--yellow)"/><text dy="7" class="is-ink">07</text></g>
+    <text class="imap-tag" x="248.3" y="446">EVENT ARC 1</text>
+    <text class="imap-tag" x="1251.7" y="446">EVENT ARC 2</text>
+  </svg>
+                <div class="imap__controls" role="group" aria-label="Map zoom">
+                  <button type="button" data-zoom="in" aria-label="Zoom in">+</button>
+                  <button type="button" data-zoom="out" aria-label="Zoom out">−</button>
+                  <button type="button" data-zoom="reset" aria-label="Show whole map">⤢</button>
+                </div>
+                <p class="imap__hint" aria-hidden="true"><span class="only-touch">Tap a zone · pinch or +/− to zoom</span><span class="only-mouse">Click a zone · drag to move · Ctrl + scroll to zoom</span></p>
               </div>
-              <div class="map-side">
-                <img class="map-side__logo" src="assets/img/logo-stacked.webp" alt="" width="376" height="280" loading="lazy">
-                <h3 class="map-side__title display">Crystal Pavilion<br>Floor Map</h3>
-                <ol class="legend">
-                  <li><span class="legend__key">01</span>Main Entrance &amp; Ticketing</li>
-                  <li><span class="legend__key" style="--k: var(--pink)">02</span>Sponsors Area</li>
-                  <li><span class="legend__key" style="--k: var(--blue)">03</span>IP Experience Booths</li>
-                  <li><span class="legend__key" style="--k: var(--blue)">04</span>Crystal Stage</li>
-                  <li><span class="legend__key legend__key--ink" style="--k: var(--cyan)">05</span>Food Street</li>
-                  <li><span class="legend__key" style="--k: var(--ink)">06</span>Re-entry &amp; Exit</li>
-                  <li><span class="legend__key legend__key--ink" style="--k: var(--yellow)">07</span>Way to Grand Ballroom</li>
+              <div class="imap__side">
+                <div class="imap__info" aria-live="polite">
+                  <p class="imap__kicker">Crystal Pavilion · Discover</p>
+                  <h3 class="imap__title">Tap any zone on the map</h3>
+                  <p class="imap__text">See what's there and how to get to it. Zoom into the IP Booths to find a specific booth.</p>
+                  <p class="imap__links"></p>
+                </div>
+                <ol class="legend imap__legend">
+                  <li><button type="button" data-zone="entrance" aria-pressed="false"><span class="legend__key" style="--k: var(--pink-dark)">01</span>Main Entrance &amp; Ticketing</button></li>
+                  <li><button type="button" data-zone="sponsors" aria-pressed="false"><span class="legend__key" style="--k: var(--pink)">02</span>Sponsors Area</button></li>
+                  <li><button type="button" data-zone="ip" aria-pressed="false"><span class="legend__key" style="--k: var(--blue)">03</span>IP Experience Booths</button></li>
+                  <li><button type="button" data-zone="stage" aria-pressed="false"><span class="legend__key" style="--k: var(--night)">04</span>Crystal Stage</button></li>
+                  <li><button type="button" data-zone="food" aria-pressed="false"><span class="legend__key legend__key--ink" style="--k: var(--cyan)">05</span>Food Street</button></li>
+                  <li><button type="button" data-zone="exit" aria-pressed="false"><span class="legend__key" style="--k: var(--ink)">06</span>Re-entry &amp; Exit</button></li>
+                  <li><button type="button" data-zone="ballroom" aria-pressed="false"><span class="legend__key legend__key--ink" style="--k: var(--yellow)">07</span>Way to Grand Ballroom</button></li>
                 </ol>
               </div>
+              <script type="application/json" class="imap-data">{"entrance":{"n":"01","name":"Main Entrance &amp; Ticketing","text":"Event Arc 1, next to the Fountain Foyer drop-off. Claim your wristband and OPF Companion here. Opens 09:30.","links":[["tickets.html","Tickets"],["access.html","Getting here"]]},"sponsors":{"n":"02","name":"Sponsors Area","text":"Partner booths, product sampling and collab merch — the first world you walk into.","links":[["sponsors.html","Partners"]]},"ip":{"n":"03","name":"IP Experience Booths","text":"20 IP booths in three layouts (A, B, C). Zoom in and tap a booth to see which IP it is.","links":[["exhibition.html#booths","All IP booths"]]},"stage":{"n":"04","name":"Crystal Stage","text":"Cosplay Cup, Ani-Karaoke and stage shows, both days from 10:30.","links":[["#timetable","Timetable"],["cosplay-cup.html","Cosplay Cup"]]},"food":{"n":"05","name":"Food Street","text":"Dotonbori-inspired stalls: takoyaki, yakisoba, onigiri, ramen and desserts.","links":[["join-us.html#booths","Food vendor booths"]]},"exit":{"n":"06","name":"Re-entry &amp; Exit","text":"Event Arc 2, Coral Wing side. Same-day re-entry with your wristband.","links":[["faq.html","Entry FAQ"]]},"ballroom":{"n":"07","name":"Way to Grand Ballroom","text":"Exit at Event Arc 2 and follow the signs along the Promenade — about a 5-minute walk to the Grand Ballroom (Connect).","links":[["#map-gb","Grand Ballroom map"]]}}</script>
             </div>
             <div class="ip-lineup">
-              <h4>IP booth lineup <span>— 20 titles across three booth layouts</span></h4>
+              <h4>IP booth lineup <span>— tap a title to find its booth on the map</span></h4>
               <ul class="ip-grid">
-                <li><b style="--k: var(--pink)">A01</b>Kagurabachi</li>
-                <li><b style="--k: var(--pink)">A02</b>Though I Am an Inept Villainess</li>
-                <li><b style="--k: var(--pink)">A03</b>Haikyu!!</li>
-                <li><b style="--k: var(--pink)">A04</b>One-Punch Man</li>
-                <li><b style="--k: var(--pink)">A05</b>Frieren: Beyond Journey's End</li>
-                <li><b style="--k: var(--yellow); --kc: var(--blue)">B01</b>DAN DA DAN</li>
-                <li><b style="--k: var(--yellow); --kc: var(--blue)">B02</b>The Apothecary Diaries</li>
-                <li><b style="--k: var(--yellow); --kc: var(--blue)">B03</b>Jujutsu Kaisen</li>
-                <li><b style="--k: var(--yellow); --kc: var(--blue)">B04</b>Kaiju No. 8</li>
-                <li><b style="--k: var(--yellow); --kc: var(--blue)">B05</b>Chainsaw Man</li>
-                <li><b style="--k: var(--yellow); --kc: var(--blue)">B06</b>Blue Lock</li>
-                <li><b style="--k: var(--yellow); --kc: var(--blue)">B07</b>Naruto</li>
-                <li><b style="--k: var(--yellow); --kc: var(--blue)">B08</b>Demon Slayer</li>
-                <li><b style="--k: var(--yellow); --kc: var(--blue)">B09</b>The Dangers in My Heart</li>
-                <li class="is-tba"><b style="--k: var(--yellow); --kc: var(--blue)">B10</b>To be announced</li>
+                <li><button type="button" class="ip-pick" data-booth="A01" aria-label="Show booth A01 on the map"><b style="--k: var(--pink)">A01</b>Kagurabachi</button></li>
+                <li><button type="button" class="ip-pick" data-booth="A02" aria-label="Show booth A02 on the map"><b style="--k: var(--pink)">A02</b>Though I Am an Inept Villainess</button></li>
+                <li><button type="button" class="ip-pick" data-booth="A03" aria-label="Show booth A03 on the map"><b style="--k: var(--pink)">A03</b>Haikyu!!</button></li>
+                <li><button type="button" class="ip-pick" data-booth="A04" aria-label="Show booth A04 on the map"><b style="--k: var(--pink)">A04</b>One-Punch Man</button></li>
+                <li><button type="button" class="ip-pick" data-booth="A05" aria-label="Show booth A05 on the map"><b style="--k: var(--pink)">A05</b>Frieren: Beyond Journey's End</button></li>
+                <li><button type="button" class="ip-pick" data-booth="B01" aria-label="Show booth B01 on the map"><b style="--k: var(--yellow); --kc: var(--blue)">B01</b>DAN DA DAN</button></li>
+                <li><button type="button" class="ip-pick" data-booth="B02" aria-label="Show booth B02 on the map"><b style="--k: var(--yellow); --kc: var(--blue)">B02</b>The Apothecary Diaries</button></li>
+                <li><button type="button" class="ip-pick" data-booth="B03" aria-label="Show booth B03 on the map"><b style="--k: var(--yellow); --kc: var(--blue)">B03</b>Jujutsu Kaisen</button></li>
+                <li><button type="button" class="ip-pick" data-booth="B04" aria-label="Show booth B04 on the map"><b style="--k: var(--yellow); --kc: var(--blue)">B04</b>Kaiju No. 8</button></li>
+                <li><button type="button" class="ip-pick" data-booth="B05" aria-label="Show booth B05 on the map"><b style="--k: var(--yellow); --kc: var(--blue)">B05</b>Chainsaw Man</button></li>
+                <li><button type="button" class="ip-pick" data-booth="B06" aria-label="Show booth B06 on the map"><b style="--k: var(--yellow); --kc: var(--blue)">B06</b>Blue Lock</button></li>
+                <li><button type="button" class="ip-pick" data-booth="B07" aria-label="Show booth B07 on the map"><b style="--k: var(--yellow); --kc: var(--blue)">B07</b>Naruto</button></li>
+                <li><button type="button" class="ip-pick" data-booth="B08" aria-label="Show booth B08 on the map"><b style="--k: var(--yellow); --kc: var(--blue)">B08</b>Demon Slayer</button></li>
+                <li><button type="button" class="ip-pick" data-booth="B09" aria-label="Show booth B09 on the map"><b style="--k: var(--yellow); --kc: var(--blue)">B09</b>The Dangers in My Heart</button></li>
+                <li class="is-tba"><button type="button" class="ip-pick" data-booth="B10" aria-label="Show booth B10 on the map"><b style="--k: var(--yellow); --kc: var(--blue)">B10</b>To be announced</button></li>
                 <li class="is-tba"><b style="--k: var(--cyan); --kc: var(--ink)">C01–05</b>Five more titles TBA</li>
               </ul>
               <p class="map-note">Floor plan and lineup are placeholders from the OPF 2027 plan and are subject to change and licensing confirmation.</p>
@@ -282,7 +436,7 @@
         </div>
       </details>
 
-      <details class="acc">
+      <details class="acc" id="map-gb">
         <summary class="acc__head"><span class="container"><span class="acc__title">Grand Ballroom Floor Map</span><span class="acc__chev"><svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></span></span></summary>
         <div class="acc__panel frame">
           <svg class="sparkle sparkle--yellow" style="right:5%;top:36px" aria-hidden="true"><use href="#i-sparkle"/></svg>
@@ -393,7 +547,7 @@
         </div>
       </details>
 
-      <details class="acc">
+      <details class="acc" id="map-cove">
         <summary class="acc__head"><span class="container"><span class="acc__title">Cove Manila Floor Map</span><span class="acc__chev"><svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></span></span></summary>
         <div class="acc__panel frame">
           <svg class="sparkle sparkle--pink" style="right:22%;top:28px" aria-hidden="true"><use href="#i-sparkle"/></svg>

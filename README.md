@@ -5,6 +5,7 @@ Content, prices and schedules are placeholders. All pages are `noindex`.
 
 - Pages: Home, Exhibition, Cosplay Cup, Music Live, Schedule & Map, Tickets, News, Article, Access, FAQ, Join Us, Sponsors, Contact, Past Events, Legal.
 - **Sample controls** (bottom-left on every page): switch the site phase (Announce / On sale / Event week / Post-event) and preview other palettes.
+- **Interactive map** (Schedule & Map → Crystal Pavilion): tap a zone to zoom and see what's there; pinch / +/− to zoom; tap a title in the IP lineup to find its booth. Zones and booths live in `src/cp-map.mjs`.
 - Swapping in the approved KV: see [KV-SWAP.md](KV-SWAP.md).
 
 Build: `node src/build.mjs` (page fragments in `src/pages/`, shared header/footer in `src/build.mjs`).
